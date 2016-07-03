@@ -1,0 +1,13 @@
+﻿.mj-checkbox-container {
+    clear: left;
+}
+
+.mj-checkbox-container .mj-image { margin-left: 3px; margin-right: 3px; }
+
+.mj-checkbox-container .mj-text {
+    position: relative;
+    top: -2px;
+    padding: 3px;
+}
+
+.mj-checkbox-container .mj-text:hover { background-color: #e8e8e8; border: 1px solid #999; border-radius: 5px; }

@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+
+<title>plugin test</title>
+
+<script src="js/jquery-1.10.2.min.js"></script>
+
+
+<script>
+
+$(document).ready(function() {
+
+console.log("ready");
+
+(function ($){
+var Ratiofix = {
+  init: function(options, elem) {
+    this.options = $.extend({},this.options,options);
+    this.elem  = elem;
+    this.$elem = $(elem);
+    this.setListeners();
+    return this;
+  },
+  options: {
+    message: "No message"
+  },
+  printMsg: function(){
+     console.log(this.options.message);
+  },
+  setListeners:function (){
+    var self=this;
+    this.$elem.on('click',function (){
+         console.log(self.options.message);
+    });
+    $(window).on('resize',$.proxy(self.printMsg, self));
+  }
+};
+
+  $.fn.ratiofix=function (options){
+    this.init= function(options, elem) {
+      this.options = $.extend({},this.options,options);
+      this.elem  = elem;
+      this.$elem = $(elem);
+
+      return this;
+  };
+
+    if ( this.length ) {
+      return this.each(function(){
+        var ratiofix = Object.create(Ratiofix);
+        ratiofix.init(options, this); 
+        $.data(this, 'ratiofix', ratiofix);
+      });
+    }
+
+
+  };
+})(jQuery);
+
+
+$("#a").ratiofix({message: "hello"});
+$("#b").ratiofix({message: "robert"});
+
+});
+
+</script>
+
+</head>
+
+<body>
+
+<h1>Plugin Test</h1>
+
+<div id="a">a</div>
+<div id="b">b</div>
+
+</body>
+</html>

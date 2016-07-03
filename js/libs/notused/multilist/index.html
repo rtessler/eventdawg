@@ -1,0 +1,389 @@
+﻿<!doctype html>
+<html>
+<head>
+<title>Multilist</title>
+
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/multilist.js" type="application/javascript"></script>
+<link rel="stylesheet" type="text/css" href="css/multilist.css">
+
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<script>
+
+    $(document).ready(function () {
+
+        function message(msg) {
+            //console.log(msg);
+            $("#status").html(msg);
+        }
+
+        $("#sidepanel ul li a").click(function (e) {
+
+            e.preventDefault();
+
+            $(e.target).parent().parent().find(".active").removeClass("active");
+            $(e.target).addClass("active");
+        });
+
+        function createMultiListEvents() {
+
+            var self = this;
+
+            $(".getSelected").click(function (e) {
+
+                e.preventDefault();
+                var arr = $("#list1").multilist("getSelected");
+
+                var selected = [];
+
+                for (var i = 0; i < arr.length; i++)
+                    selected.push(arr[i].id);
+
+                message(selected.join());
+            });
+
+            $(".getSelected2").click(function (e) {
+
+                e.preventDefault();
+
+                var arr = $("#list2").multilist("getSelected");
+
+                var str = "";
+
+                for (var i = 0; i < arr.length; i++)
+                    str += arr[i].id + ", ";
+
+                message(str);
+            });
+
+            $(".add").click(function (e) {
+
+                //console.log("add click");
+
+                data = { id: 88, text: "Ricki Martin", selected: 0, image: "test.png" };
+
+                $("#list1").multilist("add", data);
+            });
+
+            $(".insert").click(function (e) {
+
+                data = { id: 99, text: "James Blake", selected: 0, image: "test.png" };
+
+                $("#list1").multilist("insert", 5, data);
+            });
+
+            $(".remove").click(function (e) {
+                $("#list1").multilist("remove", 5);
+            });
+
+            $(".refill").click(function (e) {
+
+                data = [{ id: 88, text: "Ricki Martin", selected: 0, image: "test.png" },
+                        { id: 99, text: "James Blake", selected: 0, image: "test.png" }];
+
+                $("#list1").multilist("refill", data);
+            });
+
+            $(".clear").click(function (e) {
+                $("#list1").multilist("clear");
+            });
+
+            $(".close").click(function (e) {
+                $("#list1").multilist("close");
+            });
+
+            $(".selectAll").click(function (e) {
+
+                //console.log("selectAll");
+
+                e.preventDefault();
+                $("#list1").multilist("selectAll");
+                message("");
+            });
+
+            $(".deselectAll").click(function (e) {
+
+                e.preventDefault();
+                $("#list1").multilist("deselectAll");
+                message("");
+            });
+
+            $(".hasChanged").click(function (e) {
+
+                e.preventDefault();
+                var changed = $("#list1").multilist("hasChanged");
+                message("changed = " + changed);
+            });
+        }
+
+        function bindEvents() {
+
+            $("#list1").unbind("select");
+            $("#list1").on("select", function (e, data) {
+                //console.log(data);
+                message("id: " + data.id + " " + data.text + " selected = " + data.selected);
+            });
+
+            $("#list2").unbind("select");
+            $("#list2").on("select", function (e, data) {
+                //console.log(data);
+                message("id: " + data.id + " " + data.text + " selected = " + data.selected);
+            });
+
+            $("#list3").unbind("select");
+            $("#list3").on("select", function (e, data) {
+                //console.log(data);
+                message("id: " + data.id + " " + data.text + " selected = " + data.selected);
+            });
+        }
+
+        $(".listview").click(function (e) {
+
+            var data = [
+            { id: 1, text: "Strawberry", },
+            { id: 2, text: "Banana", },
+            { id: 3, text: "Kiwi", },
+            { id: 4, text: "Orange", },
+            { id: 5, text: "Mango", },
+            { id: 6, text: "Melon", },
+            { id: 7, text: "Lime", },
+            { id: 8, text: "Apricot", },
+            { id: 9, text: "Apple", }];
+
+            $("#list1").multilist({ data: data, type: "text" });
+            $("#list2").html("");
+            $("#list3").html("");
+
+            bindEvents();
+        });
+
+        $(".checklist").click(function (e) {
+
+            var data = [
+            { id: 1, text: "Michael Jackson", selected: 0, image: "test.png" },
+            { id: 2, text: "Katie Perry", selected: 0, image: "test.png" },
+            { id: 3, text: "Rhianna", selected: 0, image: "test.png" },
+            { id: 4, text: "Geoff Buckley", selected: 0, image: "test.png" },
+            { id: 5, text: "Amy Winehouse", selected: 0, image: "test.png" },
+            { id: 6, text: "Jimi Hendrix", selected: 0, image: "test.png" },
+            { id: 7, text: "Wolfgang Amedeus Mozart", selected: 0, image: "test.png" },
+            { id: 8, text: "Daft Punk", selected: 0, image: "test.png" },
+            { id: 9, text: "Dead Maus", selected: 1, image: "test.png" }];
+
+            $("#list1").multilist({ data: data, type: "checkbox" });
+            $("#list2").html("");
+            $("#list3").html("");
+
+            bindEvents();
+        });
+
+        $(".radiolist").click(function (e) {
+
+            var data = [
+            { id: 1, text: "White", selected: 1 },
+            { id: 2, text: "Black", selected: 0, disabled: true },
+            { id: 3, text: "Red", selected: 0 },
+            { id: 4, text: "Green", selected: 0 },
+            { id: 5, text: "Blue", selected: 0 },
+            { id: 6, text: "Yellow", selected: 0 },
+            { id: 7, text: "Orange", selected: 0 },
+            { id: 8, text: "Grey", selected: 0 },
+            { id: 9, text: "Purple", selected: 0 },
+            { id: 10, text: "Magenta", selected: 0 },
+            { id: 11, text: "Brown", selected: 0 }];
+
+            $("#list1").multilist({ data: data, type: "radiobutton" });
+            $("#list2").html("");
+            $("#list3").html("");
+
+            bindEvents();
+        });
+
+        $(".imagelist").click(function (e) {
+
+            var data = [
+            { id: 1, text: "<h3>beyonce</h3>", image: "beyonce.jpg" },
+            { id: 2, text: "<b>britany</b>", image: "britany.jpg" },
+            { id: 3, text: "<i>rhianna</i>", image: "rhianna.jpg" }
+            ];
+
+            $("#list1").multilist({ data: data, type: "image", image_path: "images/celebrities/", });
+            $("#list2").html("");
+            $("#list3").html("");
+
+            bindEvents();
+        });
+
+
+        $(".bigdata").click(function (e) {
+
+            var data = [];
+
+            message("building data");
+
+            for (var i = 0; i < 3000; i++) {
+                data.push({ id: i, text: String(i) });
+            }
+
+            message("filling list");
+
+            $("#list1").multilist({ data: data, type: "checkbox" });
+
+            message("finished");
+
+            bindEvents();
+        });
+
+
+        $(".multi-instance").click(function (e) {
+
+            var list1 = [
+                    { id: 1, text: "Europe", image: 'test.png' },
+                    { id: 2, text: "Spain", image: 'test.png' },
+                    { id: 3, text: "France", image: 'test.png' },
+                    { id: 4, text: "Germany", image: 'test.png' },
+                    { id: 5, text: "Italy", image: 'test.png' },
+                    { id: 6, text: "Switzerland", image: 'test.png' },
+                    { id: 7, text: "England", image: 'test.png' },
+                    { id: 8, text: "Portugal", image: 'test.png' },
+                    { id: 9, text: "Austria", image: 'test.png' }
+            ];
+
+            var list2 = [
+            { id: 1, text: "America" },
+            { id: 2, text: "USA" },
+            { id: 3, text: "Canada", selected: true },
+            { id: 4, text: "Mexico", disabled: true },
+            { id: 5, text: "Columbia" },
+            { id: 6, text: "Brazil" },
+            { id: 7, text: "Equador" },
+            { id: 8, text: "Argentina" },
+            { id: 9, text: "Venuzuela" },
+            { id: 10, text: "Peru" },
+            { id: 11, text: "Uruguay" },
+            { id: 12, text: "Paraguay" },
+            { id: 13, text: "Chile" }
+            ];
+
+            var list3 = [
+            { id: 1, text: "Japan" },
+            { id: 2, text: "China" },
+            { id: 3, text: "Korea" },
+            ];
+
+            $("#list1").multilist({
+                data: list1,
+                type: 'image'
+            });
+
+            $("#list2").multilist({
+                data: list2,
+                type: 'checkbox'
+            });
+
+            $("#list3").multilist({
+                data: list3,
+                type: 'radiobutton'
+            });
+
+            bindEvents();
+        });       
+
+        createMultiListEvents();
+
+        $(".listview").click();
+    });
+
+
+</script>
+
+</head>
+
+<body>
+
+
+
+<div id="wrapper">
+
+<nav>
+    <div class="table">
+        <div class="row">
+            <div class="cell"><a href="index.html" class="multilist"">Multilist</a></div>
+            <div class="cell"><a href="chekkbox.html" class="chekkbox">Chekkbox</a></div>
+            <div class="cell"><a href="treeview.html" class="tree">Treeview</a></div>
+            <div class="cell"><a href="documentation.html" class="documentation"">Documentation</a></div>
+            <div class="cell"><a href="#" class="blog">Blog</a></div>
+        </div>
+    </div>
+</nav>
+
+    <div class="clear"></div>
+
+<div style="padding-left: 20px; padding-right: 20px; padding-bottom: 20px;">
+
+
+<h1>Multilist examples</h1>
+
+    <p>
+        Multilist: a jquery plugin for displaying json data as a list of checkboxes, radiobuttons, images or text.
+    </p>
+
+    <p style="font-size: 0.8em">Tested on ie 9, chrome, firefox and safari. 
+        <br />
+        Download from <a href='https://github.com/rtessler/multilistjs' target="_blank">github</a>.
+        <a href="mailto:robert@rtessler.com">Robert Tessler Oct-2013</a>
+    </p>
+
+    <div id="sidepanel">
+
+	    <ul>
+		    <li><a class="listview active">list view</a></li>
+		    <li><a class="checklist">check list</a></li>
+		    <li><a class="radiolist">radio button list</a></li>
+		    <li><a class="imagelist">image list</a></li>
+            <!--<li><a class="bigdata">big data test</a></li>-->
+            <li><a class="multi-instance">multi instance</a></li>
+	    </ul>
+
+    </div>
+
+    <div class="content">
+       
+        <div id="list-container">
+
+            <div id="list1" ></div> 
+            <div id="list2" ></div> 
+            <div id="list3" ></div>                        
+         
+        </div>
+
+        <div class="clear"></div>
+
+        <div id="controls">
+
+            <div id="status"></div>
+
+            <a href="#" class="getSelected">get selected</a>
+            <a href="#" class="selectAll">select all</a>
+            <a href="#" class="deselectAll">deselect all</a>
+            <a href="#" class="add">add</a>
+            <a href="#" class="insert">insert</a>
+            <a href="#" class="remove">remove</a>
+            <a href="#" class="refill">refill</a>
+            <a href="#" class="clear">clear</a>
+            <a href="#" class="close">close</a>
+            <a href="#" class="hasChanged">has Changed?</a>
+        </div>  
+
+    </div>
+
+</div>
+
+</div>  <!-- wrapper -->
+
+</body>
+</html>
+
+
+

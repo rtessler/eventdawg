@@ -1,0 +1,254 @@
+﻿<!doctype html>
+<html>
+<head>
+<title>Menu</title>
+
+<script src="../js/libs/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<link rel="stylesheet" type="text/css" href="../css/mjAll.css">
+<script src="../js/mjMenu.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+        function message(msg) {
+            console.log(msg);
+            $("#status").html(msg);
+        }
+
+        var menudata = [
+                {
+                    id: 1,
+                    text: 'File',
+                    items: [{ id:2, text: 'Open' }, { id:3, text: 'Save' }, { id: 4, text: 'Save As', items: [{id: 5, text: "A"}, {id: 6, text: "B"}] }]
+                },
+                { id: 7, text: 'Edit', items: [{ id: 8, text: 'Cut' }, { id: 9, text: 'Copy' }, { id: 10, text: 'Paste' }] },
+                { id: 11, text: 'About', items: [{ id: 12, text: 'Contact' }] }
+        ];
+
+        function createMenuHTML() {
+
+            var s = "<ul id='poodle'>";
+            s += "<li>";
+            s += "File";
+            s += "<ul>";
+            s += "<li><div>open</div></li>";
+            s += "<li>save";
+            s += "<ul>";
+            s += "<li>a</li>";
+            s += "<li>b</li>";
+            s += "<li>c</li>";
+            s += "</ul>";
+            s += "</li>";
+            s += "<li>exit</li>";
+            s += "</ul>";
+            s += "</li>";
+            s += "<li>";
+            s += "Edit";
+            s += "<ul>";
+            s += "<li>Cut</li>";
+            s += "<li>Copy</li>";
+            s += "<li>Paste</li>";
+            s += "</ul>";
+            s += "</li>";
+            s += "<li>";
+            s += "About";
+            s += "</li>";
+            s += "<li>";
+            s += "Contact";
+            s += "</li>";
+            s += "</ul>";
+
+            $("#menu").html(s);
+        }
+
+        // events
+
+        $("#sidepanel ul li a").click(function (e) {
+
+            e.preventDefault();
+
+            $(e.target).parent().parent().find(".active").removeClass("active");
+            $(e.target).addClass("active");
+
+            var id = $(e.target).attr("data-id");
+
+            switch (id) {
+                case "basic":
+
+                    $("#menu").mjMenu({data: menudata});
+
+                    $("#menu").on("select", function (e, data) {
+                        message(data);
+                    });
+                    break;
+
+                case "vertical":
+
+                    $("#menu").mjMenu({ data: menudata, orientation: "vertical" });
+
+                    $("#menu").on("select", function (e, data) {
+                        message("id: " + data.id + " " + data.text );
+                    });
+                    break;
+
+                case "open-on-click":
+
+                    $("#menu").mjMenu({ data: menudata, open_on_click: true });
+
+                    $("#menu").on("select", function (e, data) {
+                        message("id: " + data.id + " " + data.text);
+                    });
+                    break;
+
+                case "build-from-html":
+
+                    $("#menu").mjMenu("close");
+
+                    createMenuHTML();
+                    
+                    $("#poodle").mjMenu();
+
+                    $("#poodle").on("select", function (e, data) {
+                        message(data);
+                    });
+                    break;
+
+                case "documentation":
+                    break;
+            }
+        });
+
+        $(".controls a").click(function(e) {
+
+            e.preventDefault();
+
+            switch ( $(e.currentTarget).attr("class") )
+            {
+                case "add":
+
+                    data = { id: 88, text: "Ricki Martin", selected: 0, image: "test.png" };
+
+                    $("#menu").mjListBox("add", data);
+                    break;
+
+                case "insert":
+
+                    data = { id: 99, text: "James Blake", selected: 0, image: "test.png" };
+
+                    $("#menu").mjListBox("insert", 5, data);
+                    break;
+
+                case "remove":
+                    
+                    $("#menu").mjListBox("remove", 5);
+                    break;
+
+                case "open":
+
+                    data = [{ id: 88, text: "Ricki Martin", selected: 0, image: "test.png" },
+                            { id: 99, text: "James Blake", selected: 0, image: "test.png" }];
+
+                    $("#menu").mjListBox("refill", data);
+                    break;
+
+                case "clear":
+
+                    $("#menu").mjListBox("clear");
+                    break;
+
+                case "close":
+
+                    $("#menu").mjListBox("close");
+                    break;
+            }
+        });
+
+        $(".basic").click();
+    });
+
+
+</script>
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+<nav>
+    <div class="table">
+        <div class="row">
+            <div class="cell"><a href="mjListBox.html" >ListBox</a></div>
+            <div class="cell"><a href="mjCheckBox.html" >CheckBox</a></div>
+            <div class="cell"><a href="mjRadioButton.html" >RadioButton</a></div>
+            <div class="cell"><a href="mjTreeView.html" >TreeView</a></div>
+            <div class="cell"><a href="mjGrid.html" >Grid</a></div>
+            <div class="cell"><a href="mjMenu.html" >Menu</a></div>
+            <div class="cell"><a href="documentation.html" >Documentation</a></div>
+            <div class="cell"><a href="#" >Blog</a></div>
+        </div>
+    </div>
+</nav>
+
+    <div class="clear"></div>
+
+<div style="padding-left: 20px; padding-right: 20px; padding-bottom: 20px;">
+
+
+<h1>Menu examples</h1>
+
+    <p>
+        Menu: a jquery plugin for displaying json data as a navigation menu.
+    </p>
+
+    <p style="font-size: 0.8em">Tested on ie 9, chrome, firefox and safari. 
+        <br />
+        Download from <a href='https://github.com/rtessler/multilistjs' target="_blank">github</a>.
+        <a href="mailto:robert@rtessler.com">Robert Tessler Oct-2013</a>
+    </p>
+
+    <div id="sidepanel">
+
+	    <ul>
+		    <li><a class="basic active" data-id="basic">basic</a></li>
+		    <li><a class="vertical" data-id="vertical">vertical</a></li>
+            <li><a class="open-on-click" data-id="open-on-click">open on click</a></li>
+            <li><a class="build-from-html" data-id="build-from-html">build from existing html</a></li>
+            <li><a class="documentation" data-id="documentation">documentation</a></li>
+	    </ul>
+
+    </div>
+
+    <div class="content">
+       
+        <div id="menu"></div>
+
+        <div class="clear"></div>
+
+        <p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque faucibus scelerisque leo, et luctus risus ultrices et. Quisque ultrices risus at dui pharetra laoreet. Pellentesque pulvinar, metus a iaculis fermentum, risus quam adipiscing enim, eu elementum enim velit eget massa. Aenean sit amet semper turpis, vitae pretium lacus. Sed leo felis, sodales ut molestie in, cursus id ante. Curabitur facilisis, tellus sodales dignissim elementum, dui dolor pulvinar tellus, volutpat sollicitudin lectus arcu vitae diam. Duis feugiat blandit suscipit. Curabitur dui urna, fringilla id tempus ut, lacinia sit amet justo. Nam aliquet metus at massa pulvinar, id ultricies leo ultricies. Integer augue velit, adipiscing vitae feugiat vitae, malesuada vitae mauris. Nullam ultrices magna quis eros pharetra euismod. Cras ac orci ac libero porta dapibus non non odio. Cras tempor neque vehicula dui condimentum ultrices.
+        </p>
+
+        <div id="controls">
+
+            <div id="status"></div>
+
+            <a href="#" class="add">add</a>
+            <a href="#" class="insert">insert</a>
+            <a href="#" class="remove">remove</a>
+            <a href="#" class="open">open</a>
+            <a href="#" class="clear">clear</a>
+            <a href="#" class="close">close</a>
+        </div>  
+
+    </div>
+
+</div>
+
+</div>  <!-- wrapper -->
+
+</body>
+</html>

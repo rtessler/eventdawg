@@ -1,0 +1,46 @@
+ <div id="login" class="login-dialog" >
+
+<form id="login-form" method="post" action="/user/login">
+    <h2>login</h2>
+    <hr>
+    
+    <div class="form-field">
+        <label for="username">Username/Email</label>
+        <input type="text" class="username" id="username" name="username"  type="text" placeholder="username/email" required="required" />
+        <div id="username-error" class="error-text" style="position: relative; top:-2px; padding-top: 0px; padding-left: 120px;"></div>
+    </div>
+    
+    <div class="form-field">
+        <label for="password">Password</label>
+        <input type="password" class="password" id="password" name="password" required="required" />
+        <div id="password-error" class="error-text" style="position: relative; top:-2px; padding-top: 0px; padding-left: 120px;"></div>
+    </div>
+
+    <div class="form-field" style="margin-bottom: 10px;">
+        <label for="keep_me_logged_in"></label>
+        <input type="checkbox" name="keep_me_logged_in" class="keep_me_logged_in"/>
+        <span style="margin-left: 10px;">Keep me logged in</span>
+    </div>
+        
+    <table >
+        <tr>
+            <td style="vertical-align: middle;">
+                <div class="form-field" style="width: 120px;">
+                    <button type="submit" id="btn-login" name="btn-login" class="btn" style="float: right;">Login</button>
+                </div>
+            </td>
+            <td style="padding-left:10px;">
+                <a href='#' class="reset-password btn btn-link" >I forgot my password</a>
+                <br>
+                <a href='#' class="register btn btn-link" >Register</a>
+            </td>
+        </tr>   
+    </table>
+
+    <hr>
+    
+    <a class="btn-facebook-login" href="#"></a>
+    <div id="facebook-login-error" class="error-text" ></div>
+</form>
+
+</div>  

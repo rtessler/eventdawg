@@ -1,0 +1,21 @@
+﻿<a href="#" class="event" data-id='<%= model.id %>'>
+
+    <img src='<%= image %>' />
+                     
+    <div class='text truncate170' title="<%= model.name %>"><%= model.name %></div>    
+                     
+    <img class="marker" src="img/markers/facebook/<%= marker %>" />
+
+    <div class='date'> <%= model.dm1.format("D MMM hh:mm") %> </div>
+
+    <div class='clear'></div>
+
+</a>
+
+<div class="people">
+
+    <% _.each(people, function(o) { %>
+        <div class="person"><%= o %></div>
+    <% }); %>
+
+</div>

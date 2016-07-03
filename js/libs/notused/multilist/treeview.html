@@ -1,0 +1,437 @@
+﻿<!doctype html>
+<html>
+<head>
+<title>Multilist and Treeview</title>
+
+<script src="js/jquery-1.10.2.min.js"></script>
+
+<script src="js/treeview.js" type="application/javascript"></script>
+<link rel="stylesheet" type="text/css" href="css/treeview.css">
+
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<script>
+
+    $(document).ready(function () {
+
+        function message(msg) {
+
+            $("#status").html(msg);
+        }
+
+        $("#sidepanel ul li a").click(function (e) {
+
+            e.preventDefault();
+
+            $(e.target).parent().parent().find(".active").removeClass("active");
+            $(e.target).addClass("active");
+        });
+
+        function createEvents() {
+
+            var self = this;
+
+            $(".getSelected").click(function (e) {
+
+                e.preventDefault();
+                var arr = $("#list1").treeview("getSelected");
+
+                var selected = [];
+
+                for (var i = 0; i < arr.length; i++)
+                    selected.push(arr[i].id);
+
+                message(selected.join());
+            });
+
+            $(".getSelected2").click(function (e) {
+
+                e.preventDefault();
+
+                var arr = $("#list2").treeview("getSelected");
+
+                var str = "";
+
+                for (var i = 0; i < arr.length; i++)
+                    str += arr[i].id + ", ";
+
+                message(str);
+            });
+
+
+            $(".insert").click(function (e) {
+
+                data = { id: 99, pid: 5, text: "James Blake", selected: 0, image: "test.png" };
+
+                $("#list1").treeview("insert", 5, data);
+            });
+
+            $(".remove").click(function (e) {
+
+                $("#list1").treeview("remove", 5);
+            });
+
+            $(".refill").click(function (e) {
+
+                data = [{ id: 88, text: "Ricki Martin", selected: 0, image: "test.png" },
+                        { id: 99, text: "James Blake", selected: 0, image: "test.png" }];
+
+                $("#list1").treeview("refill", data);
+            });
+
+            $(".clear").click(function (e) {
+
+                $("#list1").treeview("clear");
+            });
+
+            $(".close").click(function (e) {
+
+                $("#list1").treeview("close");
+            });
+
+            $(".selectAll").click(function (e) {
+
+                e.preventDefault();
+                $("#list1").treeview("selectAll");
+                message("");
+            });
+
+            $(".deselectAll").click(function (e) {
+
+                e.preventDefault();
+                $("#list1").treeview("deselectAll");
+                message("");
+            });
+
+            $(".hasChanged").click(function (e) {
+
+                e.preventDefault();
+                var changed = $("#list1").treeview("hasChanged");
+
+                message("changed = " + changed);
+            });
+
+            $(".expand").click(function (e) {
+
+                $("#list1").treeview("expand", 1);
+            });
+
+            $(".collapse").click(function (e) {
+
+                $("#list1").treeview("collapse", 1);
+            });
+
+            $(".expandAll").click(function (e) {
+
+                $("#list1").treeview("expandAll");
+            });
+
+            $(".collapseAll").click(function (e) {
+
+                $("#list1").treeview("collapseAll");
+            });
+        }
+
+        function bindEvents() {
+
+            $("#list1").unbind("select");
+            $("#list1").on("select", function (e, data) {
+
+                message("id: " + data.id + " " + data.text + " selected = " + data.selected);
+            });
+
+            $("#list2").unbind("select");
+            $("#list2").on("select", function (e, data) {
+
+                message("id: " + data.id + " " + data.text + " selected = " + data.selected);
+            });
+        }
+
+        $(".treeview").click(function (e) {
+
+            //$("#ljtree").treeview("close");
+
+            var data1 = [
+                { id: 1, pid: null, text: "Fender", selected: 0 },
+                    { id: 2, pid: 1, text: "Stratocaster", selected: 1 },
+
+                        { id: 21, pid: 2, text: "Scratch plate", selected: 1 },
+                        { id: 22, pid: 2, text: "fret", selected: 1 },
+                        { id: 23, pid: 2, text: "single coil", selected: 1 },
+
+                    { id: 3, pid: 1, text: "Telecaster", selected: 1 },
+                    { id: 4, pid: 1, text: "Jaguar", selected: 0 },
+
+                        { id: 41, pid: 4, text: "Rosewood", selected: 1 },
+                        { id: 42, pid: 4, text: "Sunburst", selected: 1 },
+                        { id: 43, pid: 4, text: "strap", selected: 1 },
+
+                    { id: 5, pid: 1, text: "Acoustic", selected: 0 },
+
+                { id: 99, text: "empty node" },
+
+                { id: 6, pid: null, text: "Gibson", selected: 0 },
+                    { id: 7, pid: 6, text: "SG", selected: 0 },
+                    { id: 8, pid: 6, text: "Les Paul", selected: 1 },
+                    { id: 9, pid: 6, text: "335", selected: 1 },
+                    { id: 10, pid: 6, text: "Flying V", selected: 1 },
+                    { id: 11, pid: 6, text: "Robot", selected: 1 },
+            ];
+
+            var data2 = [
+                { id: 1, pid: null, text: "Computers", selected: 1 },
+                { id: 2, pid: 1, text: "Laptops", selected: 0 },
+                { id: 15, pid: 2, text: "Dell", selected: 0 },
+                { id: 16, pid: 2, text: "Sony", selected: 0 },
+                { id: 17, pid: 2, text: "Hewlett Packard", selected: 0 },
+
+                { id: 24, pid: 1, text: "Desktops", selected: 0 },
+
+                    { id: 25, pid: 24, text: "Compac", selected: 0 },
+                    { id: 26, pid: 24, text: "Hewlett Packard", selected: 0 }
+            ];
+
+            $("#list1").treeview({ data: data1, type: 'checkbox' });
+            $("#list2").treeview({ data: data2, type: 'checkbox' });
+
+            bindEvents();
+        });
+
+        $(".ljtree").click(function (e) {
+
+            //$("#list1").treeview("close");
+            //$("#list2").treeview("close");
+
+
+            var data = [
+            { id: 1, text: "Automotive" },
+                { id: 2, pid: 1, text: "Accessories" },
+                    { id: 3, pid: 2, text: "Caravan/Trailer" },
+                    { id: 4, pid: 2, text: "Other" },
+
+                { id: 5, pid: 1, text: "Car Dealers" },
+                    { id: 6, pid: 5, text: "Independent Dealer" },
+                    { id: 7, pid: 5, text: "Manufacturer Network" },
+            { id: 8, text: "Clothing and Accessories" },
+                { id: 9, pid: 8, text: "Accessories" },
+                    { id: 10, pid: 9, text: "Jewllery" },
+                    { id: 11, pid: 9, text: "Range" },
+                    { id: 12, pid: 9, text: "Watches" },
+                    { id: 13, pid: 9, text: "Sunglasses" },
+                { id: 14, pid: 8, text: "Clothing" },
+                    { id: 15, pid: 14, text: "Mens Wear" },
+                    { id: 16, pid: 14, text: "Range" },
+                    { id: 17, pid: 14, text: "Safety and Work Wear" },
+                    { id: 18, pid: 15, text: "Womens Wear" },
+            ];
+
+            $("#list1").treeview({ data: data, recursive: false });
+
+            //var nodes = $("#list1").treeview("getAll");
+
+            //for (var i = 0; i < data.length; i++) 
+            //{
+            //$("#list1").treeview("halfTick", data[i].id);
+            //}
+
+            $("#list1").treeview("halfTickAll");
+
+            $("#list1").on("select", function (e, d) {
+
+                var selected = $("#list1").treeview("getSelected");
+
+                if (selected.length == 0) {
+
+                    // nothing selected
+
+                    $("#list1").treeview("halfTickAll");
+                    self.nothing_selected = true;
+                }
+                else
+                    if (self.nothing_selected && selected.length == 1) {
+
+                        $("#list1").treeview("deselectAll");
+                        $("#list1").treeview("select", data.id);
+
+                        self.nothing_selected = false;
+                    }
+
+
+                message("...id: " + d.id + " selected = " + d.selected);
+
+                var siblings = $("#list1").treeview("getSiblings", d.id);
+
+                var count = 0;
+
+                $.each(siblings, function (index, n) {
+
+                    if (n.selected == 1)
+                        count++;
+                });
+
+                if (d.selected == 1) {
+                    // if no other siblings are selected, deselect other siblings
+
+                    // only 1 ticked which is ourself
+
+                    if (count == 0) {
+                        $.each(siblings, function (index, n) {
+
+                            if (n.id != d.id)
+                                $("#list1").treeview("deselect", n.id);
+                        });
+                    }
+                }
+                else
+                    if (d.selected == 0) {
+                        // we deselected something
+
+                        // if no other siblings are selected, deselect other siblings
+
+                        if (count == 0) {
+                            // half tick all siblings including ourself
+
+                            $("#list1").treeview("halfTick", d.id);
+
+                            $.each(siblings, function (index, n) {
+                                $("#list1").treeview("halfTick", n.id);
+                            });
+                        }
+                    }
+
+                // now deselect parents which have not been specifically ticked
+
+                var p = $("#list1").treeview("getNode", d.pid);
+
+                if (d.selected == 1) {
+                    while (p) {
+                        //var node = $("#list1").treeview("getNode", parent.id);
+                        $("#list1").treeview("select", p.id);
+                        var p = $("#list1").treeview("getNode", p.pid);
+                    }
+                }
+                else {
+                    /*
+                    while (parent)
+                    {
+                        var node = $("#ljtree").treeview("get", parent.id);
+                        $("#ljtree").treeview("deselect", node.id);
+                        var parent = $("#ljtree").treeview("getParent", node.id);
+                    } 
+                    */
+                }
+            });
+
+            bindEvents();
+
+            $(".getSelected").click(function (e) {
+
+                e.preventDefault();
+                var arr = $(".treeview").treeview("getSelected");
+
+                var selected = [];
+
+                for (var i = 0; i < arr.length; i++)
+                    selected.push(arr[i].id);
+
+                message(selected.join());
+            });
+
+        });
+
+        createEvents();
+
+        $(".treeview").click();
+    });
+
+
+</script>
+
+</head>
+
+<body>
+
+
+
+<div id="wrapper">
+
+<nav>
+    <div class="table">
+        <div class="row">
+            <div class="cell"><a href="index.html" class="multilist"">Multilist</a></div>
+            <div class="cell"><a href="chekkbox.html" class="chekkbox">Chekkbox</a></div>
+            <div class="cell"><a href="treeview.html" class="tree">Treeview</a></div>
+            <div class="cell"><a href="documentation.html" class="documentation"">Documentation</a></div>
+            <div class="cell"><a href="#" class="blog">Blog</a></div>
+        </div>
+    </div>
+</nav>
+
+    <div class="clear"></div>
+
+<div style="padding-left: 20px; padding-right: 20px; padding-bottom: 20px;">
+
+
+<h1>TreeView examples</h1>
+
+    <p>
+        Treeview: a jquery plugin for displaying json data as a tree of checkboxes, images or text.
+    </p>
+
+    <p style="font-size: 0.8em">Tested on ie 9, chrome, firefox and safari. 
+        <br />
+        Download from <a href='https://github.com/rtessler/multilistjs' target="_blank">github</a>.
+        <a href="mailto:robert@rtessler.com">Robert Tessler Oct-2013</a>
+    </p>
+
+    <div id="sidepanel">
+
+	    <ul>
+		    <li><a class="treeview">tree view</a></li>
+		    <li><a class="ljtree">lj tree</a></li>
+	    </ul>
+
+    </div>
+
+    <div class="content">
+       
+        <div id="list-container">
+
+            <div id="list1" ></div> 
+            <div id="list2" ></div>                         
+         
+        </div>
+
+        <div class="clear"></div>
+
+        <div id="controls">
+
+            <div id="status"></div>
+
+            <a href="#" class="getSelected">get selected</a>
+            <a href="#" class="selectAll">select all</a>
+            <a href="#" class="deselectAll">deselect all</a>
+            <a href="#" class="insert">insert</a>
+            <a href="#" class="remove">remove</a>
+            <a href="#" class="refill">refill</a>
+            <a href="#" class="clear">clear</a>
+            <a href="#" class="close">close</a>
+            <a href="#" class="hasChanged">has Changed?</a>
+            <a href="#" class="expand">expand</a>
+            <a href="#" class="collapse">collapse</a>
+            <a href="#" class="expandAll">expand all</a>
+            <a href="#" class="collapseAll">collapse all</a>
+
+        </div>  
+
+    </div>
+
+</div>
+
+</div>  <!-- wrapper -->
+
+</body>
+</html>
+
+
+

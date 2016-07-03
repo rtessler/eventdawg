@@ -1,0 +1,207 @@
+﻿<!doctype html>
+<html>
+<head>
+<title>mjCheckBox</title>
+
+<script src="../js/libs/jquery-1.11.1.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<link rel="stylesheet" type="text/css" href="../css/mjAll.css">
+<script src="../js/mjCheckBox.js"></script>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        function message(msg) {
+            //console.log(msg);
+            $("#status").html(msg);
+        }
+
+        $("#sidepanel ul li a").click(function (e) {
+
+            e.preventDefault();
+
+            $(e.target).parent().parent().find(".active").removeClass("active");
+            $(e.target).addClass("active");
+        });
+
+        $(".close").click(function (e) {
+
+            e.preventDefault();
+            $("#checkbox1").mjCheckBox("close");
+            message("1st checkbox closed");
+        });
+
+        $(".select").click(function (e) {
+
+            e.preventDefault();
+            $("#checkbox1").mjCheckBox("select");
+            message("1st checkbox selected");
+        });
+
+        $(".deselect").click(function (e) {
+
+            e.preventDefault();
+            $("#checkbox1").mjCheckBox("deselect");
+            message("1st checkbox deselected");
+        });
+
+        $(".disable").click(function (e) {
+
+            e.preventDefault();
+            $("#checkbox1").mjCheckBox("disable");
+            message("1st checkbox disabled");
+        });
+
+        $(".enable").click(function (e) {
+
+            e.preventDefault();
+            $("#checkbox1").mjCheckBox("enable");
+            message("1st checkbox enabled");
+        });
+
+        $(".get").click(function (e) {
+
+            e.preventDefault();
+            message("1st checkbox = " + $("#checkbox1").mjCheckBox("get"));
+            console.log($("#checkbox1").mjCheckBox("get"));
+        });
+
+        $(".half-tick").click(function (e) {
+
+            e.preventDefault();
+            $("#checkbox1").mjCheckBox("halfTick");
+            message("1st checkbox half ticked");
+        });
+
+        $(".hasChanged").click(function (e) {
+
+            e.preventDefault();
+            var changed = $("#checkbox1").mjCheckBox("hasChanged");
+            message("changed = " + changed);
+        });
+
+
+        $("#checkbox1").mjCheckBox({ id: 1, text: "America", selected: 1, disabled: false, data: { x: 123, name: "rob" } });
+
+        $("#checkbox1").on("select", function (e, data) {
+            console.log(data.data);
+            message("id: " + data.id + " " + data.text + " selected = " + data.selected);
+        });
+
+        $("#checkbox2").mjCheckBox({ id: 1, text: "Canada", selected: 0, disabled: false, data: { x: 456, name: "jane" } });
+
+        $("#checkbox2").on("select", function (e, data) {
+            console.log(data.data);
+            message("id: " + data.id + " " + data.text + " selected = " + data.selected);
+        });
+
+        $("#checkbox3").mjCheckBox({ id: 1, text: "France", selected: 0, disabled: true, data: { x: 789, name: "elvis" } });
+
+        $("#checkbox3").on("select", function (e, data) {
+            console.log(data.data);
+            message("id: " + data.id + " " + data.text + " selected = " + data.selected);
+        });
+
+        $("#checkbox4").mjCheckBox({ id: 1, text: "Australia in the Southern Hemisphere of the Planet", selected: 0, disabled: false, image: "images/britany.jpg", data: { x: 789, name: "elvis" } });
+
+        $("#checkbox4").on("select", function (e, data) {
+            console.log(data.data);
+            message("id: " + data.id + " " + data.text + " selected = " + data.selected);
+        });
+    });
+
+
+</script>
+
+</head>
+
+<body>
+
+
+
+<div id="wrapper">
+
+<nav>
+    <div class="table">
+        <div class="row">
+            <div class="cell"><a href="mjListBox.html" >ListBox</a></div>
+            <div class="cell"><a href="mjCheckBox.html" >CheckBox</a></div>
+            <div class="cell"><a href="mjRadioButton.html" >RadioButton</a></div>
+            <div class="cell"><a href="mjTreeView.html" >TreeView</a></div>
+            <div class="cell"><a href="mjGrid.html" >Grid</a></div>
+            <div class="cell"><a href="mjMenu.html" >Menu</a></div>
+            <div class="cell"><a href="documentation.html" >Documentation</a></div>
+            <div class="cell"><a href="#" >Blog</a></div>
+        </div>
+    </div>
+</nav>
+
+    <div class="clear"></div>
+
+<div style="padding-left: 20px; padding-right: 20px; padding-bottom: 20px;">
+
+
+<h1>mjCheckBox examples</h1>
+
+    <p>
+        mjCheckBox: a jquery plugin for displaying a checkbox.
+    </p>
+
+    <p style="font-size: 0.8em">Tested on ie 9, chrome, firefox and safari. 
+        <br />
+        Download from <a href='https://github.com/rtessler/multilistjs' target="_blank">github</a>.
+        <a href="mailto:robert@rtessler.com">Robert Tessler Oct-2013</a>
+    </p>
+
+    <div id="sidepanel">
+
+	    <ul>
+		    <li><a class="checkbox active">checkbox</a></li>
+	    </ul>
+
+    </div>
+
+    <div class="content">
+       
+        <div id="list-container">
+
+            <div id="checkbox1" style="float: left;"></div> 
+            <div id="checkbox2" style="float: left;"></div>
+            
+            <div id="checkbox3" ></div>
+            <div id="checkbox4" ></div>        
+         
+        </div>
+
+        <div class="clear"></div>
+
+        <div id="controls">
+
+            <div id="status"></div>
+    
+            <a href="#" class="select">select</a>
+            <a href="#" class="deselect">deselect</a>
+            <a href="#" class="disable">disable</a>
+            <a href="#" class="enable">enable</a>
+            <a href="#" class="get">get</a>
+            <a href="#" class="half-tick">half tick</a>
+            <a href="#" class="close">close</a>
+            <a href="#" class="hasChanged">has Changed?</a>
+
+        </div>  
+
+    </div>
+
+</div>
+
+</div>  <!-- wrapper -->
+
+</body>
+</html>
+
+
+

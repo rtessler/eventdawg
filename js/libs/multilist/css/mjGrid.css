@@ -1,0 +1,25 @@
+﻿.mj-grid {
+    display: table;
+    font-family: Verdana,sans-serif, Arial; font-style: normal; font-size: 12px;
+}
+
+.mj-grid-row {
+    display: table-row;
+}
+
+.mj-grid-cell {
+    display: table-cell;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 3px;
+    text-align: center;
+}
+
+.mj-grid-row .mj-grid-cell:nth-child(1) {
+    border-left: 1px solid #ddd;
+}
+
+.mj-grid-col-header {
+    border-top: 1px solid #ddd;
+    background: #e8e8e8;
+}

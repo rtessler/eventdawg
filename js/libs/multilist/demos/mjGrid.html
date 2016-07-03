@@ -1,0 +1,216 @@
+﻿<!doctype html>
+<html>
+<head>
+<title>mjGrid</title>
+
+<script src="../js/libs/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<link rel="stylesheet" type="text/css" href="../css/mjAll.css">
+<script src="../js/mjGrid.js" ></script>
+
+<script>
+
+$(document).ready(function () {
+
+    var self = this;
+
+    function message(msg) {
+        //console.log(msg);
+        $("#status").html(msg);
+    }
+
+    //$("#sidepanel ul li a").click(function (e) {
+
+    //    e.preventDefault();
+
+    //    $(e.target).parent().parent().find(".active").removeClass("active");
+    //    $(e.target).addClass("active");
+    //});
+
+    $(".showgrid1").click(function (e) {        
+
+        // id
+        // width
+        // text
+        // field  field in data
+        // datarenderer
+        // headerrenderer
+        // colspan ?????
+
+        var columns = [
+            { id: "title", text: "Title"},
+            { id: "duration", text: "Duration" },
+            { id: "%", text: "% Complete" },
+            { id: "start", text: "Start" },
+            { id: "finish", text: "Finish" },
+            { id: "effort-driven", text: "Effort Driven"}
+        ];
+
+        var rows = [];
+
+        for (var i = 0; i < 500; i++) {
+            rows[i] = [
+                "Task " + i,
+                "5 days",
+                Math.round(Math.random() * 100),
+                "01/01/2009",
+                "01/05/2009",
+                (i % 5 == 0)
+            ];
+        }
+
+        var options = {
+            columns: columns,
+            rows: rows,
+            columnFormatter: null,
+            rowFormatter: null
+        };
+
+        $("#grid1").mjGrid(options);
+        $("#grid2").html("");
+    });
+
+    $(".add-row").click(function (e) {
+
+        var data = {
+            title: "added row",
+            duration: "5 days",
+            percentComplete: Math.round(Math.random() * 100),
+            start: "01/01/2009",
+            finish: "01/05/2009",
+            effortDriven: 1
+        };
+
+        $("#grid1").mjGrid("addRow", data);
+    });
+
+    $(".insert-row").click(function (e) {
+
+        var data = {
+            title: "inserted",
+            duration: "5 days",
+            percentComplete: Math.round(Math.random() * 100),
+            start: "01/01/2009",
+            finish: "01/05/2009",
+            effortDriven: 1
+        };
+
+        $("#grid1").mjGrid("insertRow", 5, data);
+    });
+
+    $(".delete-row").click(function (e) {
+
+        $("#grid1").mjGrid("deleteRow", 5);
+    });
+
+    $(".update-row").click(function (e) {
+
+        $("#grid1").mjGrid("update-row");
+    });
+
+    $(".update-cell").click(function (e) {
+
+        $("#grid1").mjGrid("update-cell");
+    });
+
+    $(".clear").click(function (e) {
+
+        $("#grid1").mjGrid("clear");
+    });
+
+    $(".close").click(function (e) {
+
+        $("#grid1").mjGrid("close");
+    });
+
+    $(".showgrid1").trigger("click");
+
+});
+
+</script>
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+<nav>
+    <div class="table">
+        <div class="row">
+            <div class="cell"><a href="mjListBox.html" >ListBox</a></div>
+            <div class="cell"><a href="mjCheckBox.html" >CheckBox</a></div>
+            <div class="cell"><a href="mjRadioButton.html" >RadioButton</a></div>
+            <div class="cell"><a href="mjTreeView.html" >TreeView</a></div>
+            <div class="cell"><a href="mjGrid.html" >Grid</a></div>
+            <div class="cell"><a href="mjMenu.html" >Menu</a></div>
+            <div class="cell"><a href="documentation.html" class="documentation"">Documentation</a></div>
+            <div class="cell"><a href="#" class="blog">Blog</a></div>
+        </div>
+    </div>
+</nav>
+
+    <div class="clear"></div>
+
+<div style="padding-left: 20px; padding-right: 20px; padding-bottom: 20px;">
+
+<h1>mjGrid examples</h1>
+
+    <p>
+        mjGrid: a jquery plugin for displaying json data as a grid.
+    </p>
+
+    <p style="font-size: 0.8em">Tested on ie 9, chrome, firefox and safari. 
+        <br />
+        Download from <a href='https://github.com/rtessler/mulitlistjs' target="_blank">github</a>.
+        <a href="mailto:robert@rtessler.com">Robert Tessler Oct-2013</a>
+    </p>
+
+    <div id="sidepanel">
+
+	    <ul>
+		    <li><a href="#" class="showgrid1 active">show grid</a></li>
+		    <li><a href="#" class="showgrid2">show grid2</a></li>
+
+            <li><a href="#" class="add-row">add row</a></li>
+            <li><a href="#" class="insert-row">insert row</a></li>
+            <li><a href="#" class="remove-row">remove row</a></li>
+
+            <li><a href="#" class="update-row">update row</a></li>
+            <li><a href="#" class="update-cell">update cell</a></li>
+
+            <li><a href="#" class="get-row-data">get row data</a></li>
+            <li><a href="#" class="get-cell-data">get cell data</a></li>
+
+            <li><a href="#" class="clear">clear</a></li>
+            <li><a href="#" class="close">close</a></li>
+            <li><a href="#" class="two-grids">2 grids</a></li>
+	    </ul>
+
+    </div>
+
+    <div class="content">
+       
+        <div id="grid-container">
+
+            <div id="grid1" ></div> 
+            <div id="grid2" ></div>                      
+         
+        </div>
+
+        <div class="clear"></div>
+
+        <div id="status"></div> 
+
+    </div>
+
+</div>
+
+</div>  <!-- wrapper -->
+
+</body>
+</html>
+
+
+

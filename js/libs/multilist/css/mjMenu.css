@@ -1,0 +1,84 @@
+﻿.mj-menu {      /* this is a ul element */
+    list-style: none;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;    
+}
+
+.mj-menu ul {       /* submenu */
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    display: none;    
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-radius: 2px;
+    left: -1px;
+    top: 30px;        
+}
+
+.mj-menu li {
+
+    list-style: none;
+    background: #fff;
+    line-height: 25px;
+    width: 80px;    
+    position: relative;
+
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-indent: 0px;
+}
+
+.mj-menu > li {     /* top level menu with horizontal items */
+    float: left;
+    background-color: #f7f7f7;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.mj-menu li li {
+    width: 200px;   /* submenu width */
+}
+
+.mj-menu .mj-arrow-right {
+    background-image: url('../images/arrow-right.png');
+    background-repeat: no-repeat; 
+    background-position: center;
+	outline: none;
+    width: 14px;
+    height: 14px;
+    float: right;
+    margin-top: 5px;
+}
+
+.mj-menu .mj-arrow-down {
+    background-image: url('../images/arrow-down.png');
+    background-repeat: no-repeat; 
+    background-position: center;
+	outline: none;
+    width: 14px;
+    height: 14px;
+    float: right;
+    margin-top: 5px;
+}
+
+.mj-menu > li:nth-child(1) {
+    border-left: 1px solid #ccc;
+}
+
+/*.mj-menu li span {
+    padding-left: 5px;
+}*/
+
+.mj-menu li:hover {
+    background-color: #efefef;
+}
+
+
+
+

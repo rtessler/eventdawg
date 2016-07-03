@@ -1,0 +1,101 @@
+﻿<div class="dialog">
+
+    <div class="header">
+        Create/Edit Event
+    </div>
+    
+    <div class="body form">
+    
+        <table>
+            <tr>
+                <th><label for='name'>Name</label></th>
+                <td><input type='text' class='name large' required placeholder="ex: concert" value='<%= name %>' />
+                    <div class='error-msg name-error-msg'></div>
+                </td>                            
+            </tr>
+
+            <tr>
+                <th><label for='name'>Details</label></th>
+                <td>
+                    <textarea class='description large' required placeholder="Add more info">
+                    <%= description %>
+                    </textarea>
+                    <div class='error-msg description-error-msg'></div>
+                </td>
+            </tr>
+
+            <tr>
+                <th><label for='name'>Where</label></th>
+                <td>
+                    <!--<input class='where large' required placeholder="Add a place?" value='<%= where %>' />-->
+                    <input type="hidden" class='where' style="width:300px;" />
+                    <div class='error-msg where-error-msg'></div>
+                </td>
+            </tr>
+
+            <tr>
+                <th><label for='start-date'>When</label></th>
+                <td>
+                    <input type='text' class='start-date date' required readonly="readonly" value="<% start_date %>" />
+                    <input type='text' class='start-time time'  placeholder="Add a time?" value="<%= start_time %>" />
+                    <div class='error-msg start-time-error-msg'></div>
+                </td>
+            </tr>
+
+            <tr>
+                <th><label for='end-date'>To</label></th>
+                <td>
+                    <input type='text' class='end-date date' required readonly="readonly" value="<%= end_date %>"/>
+                    <input type='text' class='end-time time' placeholder="Add a time?" value="<%= end_time %>" />
+                    <div class='error-msg end-time-error-msg'></div>
+                </td>
+            </tr>
+
+            <tr>
+                <th><label for='privacy-type'>Privacy</label></th>
+                <td>
+
+                    <input type="hidden" class='privacy-type' style="width:150px;" required />
+                
+                    <div class='error-msg privacy-error-msg'></div>
+                </td>
+            </tr>
+
+            <tr>
+                <th></th>
+                <td>
+                    <input type='checkbox' class='friends-can-invite-guests' value="1"/>
+                    <span>Guests can invite friends</span>
+                    <div class='error-msg'></div>
+                </td>
+            </tr>
+
+        </table>
+
+        <div class="friends"></div>
+
+    </div>
+
+    <div class="footer">
+        <table>
+            <tr>
+                <td>
+                    <a href="#" class="invide">Invite friends</a>
+                </td>
+
+                <td>
+                    <button class="create _42ft _42fu  _42g- _42gy">Create</button>
+                    <button class="cancel _42ft _42fu">Cancel</button>
+                </td>
+
+                <td>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+</div>

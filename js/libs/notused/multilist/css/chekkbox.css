@@ -1,0 +1,51 @@
+﻿.chekkbox .box {
+    float: left;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-right: 4px;
+	width: 15px;
+	height: 15px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;	
+	border: 1px solid #b0b0b0;
+	background: #fff;	
+	text-align: center;
+	
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;	
+}
+
+.chekkbox.disabled { cursor: default; color: #000; opacity: .55; filter: Alpha(Opacity=45); }
+
+.chekkbox.half-selected .box { background: #efefef url('../images/check_indeterminate_black.png') no-repeat center; }
+
+.chekkbox.selected .box {
+	background: #fff url("../images/tick-transparent.png") center center no-repeat;
+	outline: none;	
+}
+
+.chekkbox.half-selected .box { 
+    position: relative; 
+    top: 5px;  
+    width: 13px; 
+    height: 13px; 
+    background: #efefef url('../images/check_indeterminate_black.png') no-repeat center; 
+}
+
+.chekkbox .text {
+    padding: 3px;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: Verdana,Arial,sans-serif;
+    font-style: normal;
+    font-size: 13px;
+}
+
+.chekkbox .text:hover { background: #e8e8e8; border: 1px solid #999; border-radius: 5px; }

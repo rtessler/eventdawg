@@ -1,0 +1,166 @@
+﻿<!doctype html>
+<html>
+<head>
+<title>Chekkbox</title>
+
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/chekkbox.js" type="application/javascript"></script>
+<link rel="stylesheet" type="text/css" href="css/chekkbox.css">
+
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<script>
+
+    $(document).ready(function () {
+
+        function message(msg) {
+            //console.log(msg);
+            $("#status").html(msg);
+        }
+
+        $("#sidepanel ul li a").click(function (e) {
+
+            e.preventDefault();
+
+            $(e.target).parent().parent().find(".active").removeClass("active");
+            $(e.target).addClass("active");
+        });
+
+        $(".close").click(function (e) {
+            $("#list1").chekkbox("close");
+        });
+
+        $(".select").click(function (e) {
+
+            //console.log("select");
+
+            e.preventDefault();
+            $("#list1").chekkbox("select");
+            message("");
+        });
+
+        $(".deselect").click(function (e) {
+
+            e.preventDefault();
+            $("#list1").chekkbox("deselect");
+            message("");
+        });
+
+        $(".hasChanged").click(function (e) {
+
+            e.preventDefault();
+            var changed = $("#list1").chekkbox("hasChanged");
+            message("changed = " + changed);
+        });
+
+
+        $("#list1").chekkbox({ id: 1, text: "America", selected: 1, disabled: false, data: { x: 123, name: "rob" } });
+
+        $("#list1").on("select", function (e, data) {
+            console.log(data.data);
+            message("id: " + data.id + " " + data.text + " selected = " + data.selected);
+        });
+
+
+
+        $("#list2").chekkbox({ id: 1, text: "Canada", selected: 0, disabled: false, data: { x: 456, name: "jane" } });
+
+        $("#list2").on("select", function (e, data) {
+            console.log(data.data);
+            message("id: " + data.id + " " + data.text + " selected = " + data.selected);
+        });
+
+
+
+        $("#list3").chekkbox({ id: 1, text: "France", selected: 0, disabled: false, data: { x: 789, name: "elvis" } });
+
+        $("#list3").on("select", function (e, data) {
+            console.log(data.data);
+            message("id: " + data.id + " " + data.text + " selected = " + data.selected);
+        });
+    });
+
+
+</script>
+
+</head>
+
+<body>
+
+
+
+<div id="wrapper">
+
+<nav>
+    <div class="table">
+        <div class="row">
+            <div class="cell"><a href="index.html" class="multilist"">Multilist</a></div>
+            <div class="cell"><a href="chekkbox.html" class="chekkbox">Chekkbox</a></div>
+            <div class="cell"><a href="treeview.html" class="tree">Treeview</a></div>
+            <div class="cell"><a href="documentation.html" class="documentation"">Documentation</a></div>
+            <div class="cell"><a href="#" class="blog">Blog</a></div>
+        </div>
+    </div>
+</nav>
+
+    <div class="clear"></div>
+
+<div style="padding-left: 20px; padding-right: 20px; padding-bottom: 20px;">
+
+
+<h1>Chekkbox examples</h1>
+
+    <p>
+        Chekkbox: a jquery plugin for displaying json data as a checkbox.
+    </p>
+
+    <p style="font-size: 0.8em">Tested on ie 9, chrome, firefox and safari. 
+        <br />
+        Download from <a href='https://github.com/rtessler/multilistjs' target="_blank">github</a>.
+        <a href="mailto:robert@rtessler.com">Robert Tessler Oct-2013</a>
+    </p>
+
+    <div id="sidepanel">
+
+	    <ul>
+		    <li><a class="checkbox active">checkbox</a></li>
+	    </ul>
+
+    </div>
+
+    <div class="content">
+       
+        <div id="list-container">
+
+            <div id="list1" ></div> 
+            <div id="list2" ></div> 
+            <div class="clear"></div>
+            <div id="list3" ></div>                        
+         
+        </div>
+
+        <div class="clear"></div>
+
+        <div id="controls">
+
+            <div id="status"></div>
+
+    
+            <a href="#" class="select">select</a>
+            <a href="#" class="deselect">deselect</a>
+            <a href="#" class="close">close</a>
+            <a href="#" class="hasChanged">has Changed?</a>
+
+        </div>  
+
+    </div>
+
+</div>
+
+</div>  <!-- wrapper -->
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,36 @@
+ul.teatree { list-style:none;   }
+ul.teatree ul { margin: 0px; padding: 0px; }
+ul.teatree li { padding-left: 5px; line-height: 16px;  }
+
+ul.teatree li .spacer { width: 14px; height: 2px; float: left; }
+
+ul.teatree ul.teatree { margin-left: 8px; }      /* indent levels */
+
+ul.teatree.root { padding: 0px; margin: 0px;  }
+ul.teatree li a { text-decoration: none; display: block; color: #333; }
+
+ul.teatree li a.node { color: #333; cursor: default; }
+
+ul.teatree li a.node .checkbox { border: 1px solid #aaa; border-radius: 3px;  }
+ul.teatree li a.node .image { float:left; padding-left: 5px; padding-right: 5px; position: relative;  }
+
+ul.teatree li a.node .text { float:left; margin-left: 2px; padding: 3px; border: 1px solid transparent; position: relative;  font-family: Verdana,Arial,sans-serif; font-style: normal; font-size: 13px; }
+ul.teatree li a.node .text:hover { background: #e8e8e8; border: 1px solid #999; border-radius: 5px; }
+/* ul.teatree li a.node .text:hover { text-decoration: underline; color: red; } */
+
+ul.teatree li a.node div.radio { position: relative; top: 4px; width: 16px; height: 16px; background: #fff; border-radius: 16px; border: 1px solid #999; }
+ul.teatree li a.node div.radio-inner { position: relative; top: 3px; left: 3px; width: 10px; height: 10px; background: #fff; border-radius: 10px;  }
+ul.teatree li a.node.selected div.radio-inner { background: #666; }
+
+ul.teatree li a.node .left { float: left; }
+ul.teatree li a.node .right { float: right; }
+
+ul.teatree li a.node.selected { /*background: #ccc; color: #000;*/ }
+
+ul.teatree li a.expand { position: relative; top: 5px; float:left;  margin-right: 4px; }
+
+ul.teatree .uncheck-image { position: relative; top: 5px; width: 13px; height: 13px;  background: #efefef; }
+ul.teatree .check-image { position: relative; top: 5px;  width: 13px; height: 13px; background: #efefef url('../images/check_black.png') no-repeat center; }
+ul.teatree .half-tick-image { position: relative; top: 5px;  width: 13px; height: 13px; background: #efefef url('../images/check_indeterminate_black.png') no-repeat center; }
+ul.teatree .open-image { position: relative; top: 5px;  width: 14px; height: 14px; background: url('../images/down-arrow3.png') no-repeat center; }
+ul.teatree .closed-image { position: relative; top: 5px; width: 14px; height: 14px; background: url('../images/right-arrow3.png') no-repeat center;  }

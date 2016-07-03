@@ -1,0 +1,36 @@
+﻿<div>
+
+    <a href='#' class='item friend' id='<%= id %>'>
+        <img src='<%= image %>' />
+
+        <div class="text truncate110" title="<%= name %>"><%= name %></div>
+
+        <div class="count"><%= count %></div>
+
+        <div class='clear'></div>
+    </a>
+
+</div>
+
+<% if (events) { %>
+    <div class="friend-events clearfix">
+        <ul>
+            
+            <% for (var i = 0; i < events.length; i++) { 
+                var e = events[i];
+            %>
+                <div class='event' data-id="<%= e.id %>">
+
+                    <div class='name truncate200' title='<%= e.get("name") %>'><%= e.get("name") %></div>
+                    <div class="line2">
+                        <div class='rsvp_status'><%= rsvp_status[i] %></div>
+                        <div class="date"><%= e.get("dm1").format("D MMM YY hh:mm") %> </div>
+                    </div>
+
+                </div>
+            <% } %>
+            
+        </ul>
+    </div>
+
+<% } %>

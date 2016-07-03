@@ -1,0 +1,185 @@
+﻿<!doctype html>
+<html>
+<head>
+<title>mjTemplateListBox</title>
+
+
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="../css/mjAll.css">
+
+<script src="../js/libs/jquery-1.11.1.min.js"></script>
+<script src="../js/libs/underscore-min.js"></script>
+<script src="../js/mjTemplateListBox.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+        $.ajaxPrefilter("json script", function (options) {
+            options.crossDomain = true;
+        });
+
+        $.getScript("demoMenu.html", function (data, textStatus, jqxhr) {
+            console.log(data); // Data returned
+            console.log(textStatus); // Success
+            console.log(jqxhr.status); // 200
+            console.log("Load was performed.");
+
+            $("nav").html(data);
+        });
+
+        //response.writeHead( {'Access-Control-Allow-Origin':'*'});
+
+        //$("nav").load("demoMenu.html");
+
+        function message(msg) {
+            //console.log(msg);
+            $("#status").html(msg);
+        }
+
+        $("#sidepanel ul li a").click(function (e) {
+
+            e.preventDefault();
+
+            $(e.target).parent().parent().find(".active").removeClass("active");
+            $(e.target).addClass("active");
+        });
+
+        var data = [{ id: 1, image: "images/planets/mercury.jpg", heading: "mercury", description: "1st planet from the sun" },
+            { id: 2, image: "images/planets/venus.jpg", heading: "venus", description: "2nd planet from the sun" },
+            { id: 3, image: "images/planets/earth.jpg", heading: "earth", description: "3rd planet from the sun" },
+            { id: 4, image: "images/planets/mars.jpg", heading: "mars", description: "4th planet from the sun" },
+            { id: 5, image: "images/planets/jupiter.jpg", heading: "jupiter", description: "5th planet from the sun" },
+            { id: 6, image: "images/planets/saturn.jpg", heading: "saturn", description: "6th planet from the sun" },
+            { id: 7, image: "images/planets/neptune.jpg", heading: "neptune", description: "7th planet from the sun" },
+            { id: 8, image: "images/planets/uranus.jpg", heading: "uranus", description: "8th planet from the sun" },
+            { id: 9, image: "images/planets/pluto.jpg", heading: "pluto", description: "9th planet from the sun" },
+        ];
+
+        $("#list-container").mjTemplateListBox({ data: data, template_id: "iphone-list-item-template" });
+
+        $("#list-container").on("select", function (e, d) {
+
+            console.log(d);
+        });
+
+    });
+
+
+</script>
+
+<style>
+
+.arrow {
+    width: 0;
+    height: 0;
+}
+
+.arrow.arrow-right {
+	border-top: 15px solid transparent;
+	border-bottom: 15px solid transparent;	
+	border-left: 15px solid #b0b0b0;
+}
+
+.iphone-list-item {
+    padding: 5px;
+    background: #fff;
+    height: 45px;
+    border-bottom: 1px solid #ccc;
+    display: block;
+}
+
+.iphone-list-item img {
+    width: 45px;
+    float: left;
+    margin-right: 5px;
+}
+
+.iphone-list-item .open {
+    float: right;
+    position: relative;
+    top: 5px;
+}
+
+.iphone-list-item .text {
+    float: left;
+}
+
+.iphone-list-item .text .heading {
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.iphone-list-item .text .description {
+    font-size: 11px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+<nav></nav>
+
+    <div class="clear"></div>
+
+<div style="padding-left: 20px; padding-right: 20px; padding-bottom: 20px;">
+
+
+<h1>mjTemplateListBox examples</h1>
+
+    <p>
+        mjTemplateListBox: a jquery plugin for displaying a listbox where each item is specified by a underscore template.
+    </p>
+
+    <p style="font-size: 0.8em">Tested on ie 9, chrome, firefox and safari. 
+        <br />
+        Download from <a href='https://github.com/rtessler/multilistjs' target="_blank">github</a>.
+        <a href="mailto:robert@rtessler.com">Robert Tessler Oct-2013</a>
+    </p>
+
+    <div id="sidepanel">
+
+    </div>
+
+    <div class="content">
+       
+        <div id="list-container"></div>
+
+        <div class="clear"></div>
+
+        <div id="controls">
+
+            <div id="status"></div>
+
+        </div>  
+
+    </div>
+
+</div>
+
+</div>  <!-- wrapper -->
+
+<script type="text/template" id="iphone-list-item-template">
+
+    <div class="iphone-list-item clear">
+
+        <img src="<%= image %>" />
+
+        <div class="text" data-action="text">
+            <div class="heading"><%= heading %></div>
+            <div class="description"><%= description %></div>
+        </div>
+
+        <div class="open"><a href="#" data-action="open"><div class="arrow arrow-right"></div></a></div>
+
+    </div>
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+﻿
+<ul class="tiles">
+            
+    <% for (var i = 0; i < events.length; i++)  { 
+                       
+            var e = events[i]; %>
+
+            <li data-eid="<%= e.id %>">
+
+                <a class="link" href="https://www.facebook.com/events/<%= e.id %>" target="_blank" >
+
+                    <img src="<%= e.picture.data.url %>" />
+
+                </a>
+
+                <p>
+                    <%= e.name %>
+
+                    <div class="dates">
+
+                    <% if (e.dm1.day() == e.dm2.day()) { 
+
+                        if (e.dm1.hour() != e.dm2.hour()) { %>
+                            <%= e.dm1.format("D MMM YYYY hh:mm") %> - <%= e.dm2.format("hh:mm") %> 
+                        <% } else { %>
+                            <%= e.dm1.format("D MMM YYYY hh:mm") %> 
+                        <% } %>
+
+                    <% } else { %>
+                        <%= e.dm1.format("D MMM hh:mm") %> - <%= e.dm2.format("D MMM YYYY hh:mm") %> 
+                    <% } %>
+
+                    </div>
+<!--
+                    <p class="description truncate110"> <%= e.description %> </p>
+
+                    <p class="attending">
+
+                        attending:
+
+                        <% if (!empty(e.attending)) { 
+                            _.each(e.attending, function(a) { %>
+                                <span><%= a.name %>: <%= a.rsvp_status %></span>
+                            <% });  } %>
+
+                    </p>-->
+                </p>
+
+            </li>
+
+    <% } %>
+            
+</ul>

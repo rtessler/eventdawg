@@ -1,0 +1,67 @@
+<div class="contents">
+
+    <div class="heading truncate500"><%= heading %></div>
+    <div class="address"><%= address %></div>  
+    
+    <br />         
+                 
+    <div id="wrapper">
+                
+        <div class="nano event-details-nano">
+	        <div class="content">                     
+                <pre><div class="description "><%= description %></div></pre>
+            </div>
+        </div>  
+        
+    </div> 
+
+    <br />
+    
+    <div class='table' style="width: 100%;">
+        <div class='row'>
+
+            <div class='people cell' style="width:20%;">
+                <p class="attending">Attending:</p>
+                <p class="maybe">Maybe:</p>
+                <p class="invited">Invited:</p>
+                <p class="declined">Declined:</p>
+            </div>
+
+            <!--
+            <div class='cell' style="width:20%; vertical-align:middle;">
+                <a class="bookmark" href="#">
+                    <img class="star" src='img/star_empty.png'/>
+                </a>
+            </div>
+            -->
+
+            <div class='cell image' >
+                <img src='<%= image %>' />
+            </div>
+
+            <div class="info cell" style="width:20%;">
+
+                <!--
+                <div class="cats">
+                    <span class="cat1"></span>
+                    <span class="cat2"></span>
+                </div>
+                -->
+        
+                <div class="more" >
+                    <a class="link" href="https://www.facebook.com/events/<%= id %>" target="_blank" >
+                        <span style="float:left;">more&nbsp;</span>
+                        <img style="float:right;" src='img/right-arrow.png' />
+                    </a>
+                </div>
+            </div>   
+
+            <!--<div class='cell' style="width:20%;"></div>-->
+        </div>
+    </div>
+
+    <br />
+
+    <p><span class="start-date"><%= start_date %></span> - <span class="end-date"><%= end_date %></span></p>
+
+</div>

@@ -1,0 +1,13 @@
+﻿.mj-radiobutton {
+    clear: left;
+}
+
+.mj-radiobutton.selected .mj-radio .mj-dot { background: #666; }
+
+.mj-radiobutton.disabled { cursor: default; color: #000; opacity: .55; filter: Alpha(Opacity=45); }
+
+.mj-radiobutton .mj-image { padding-left: 5px; padding-top:4px; position: relative; margin-right: 3px; }
+
+.mj-radiobutton .mj-text { position: relative; top: -1px; padding: 3px; }
+
+.mj-radiobutton .mj-text:hover { background: #e8e8e8; border: 1px solid #999; border-radius: 5px; }

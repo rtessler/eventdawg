@@ -1,0 +1,91 @@
+.mj-treeview-container {
+    position: relative;
+    width: 100%;
+    height: 100%;           /* actual height depends on container */
+    min-width: 100px;
+    min-height: 36px;       /* height of filter box */
+    overflow: hidden;    
+}
+
+.mj-treeview-container .the-tree {        
+    overflow: auto;         /* this bit is scrollable */
+    position: absolute;
+    top: 0px;
+    left: 5px;
+    right: 5px;
+    bottom: 0px;
+    overflow-x: hidden;
+}
+
+.mj-treeview { list-style:none; 
+              padding: 0px; 
+              margin: 3px; 
+}
+
+.mj-treeview .mj-item { line-height: 12px; clear:left; }
+
+.mj-treeview .mj-item .mj-content {  float: left; text-decoration: none; display: block; color: #333; cursor: default; }
+
+.mj-treeview .mj-item .mj-content.disabled { cursor: default; color: #000; opacity: .55; filter: Alpha(Opacity=45); }
+
+.mj-treeview .mj-item .mj-content .mj-image { padding-left: 5px; padding-right: 5px; position: relative; }
+
+.mj-treeview .mj-item .mj-content .mj-text {
+                                 display: block;
+                                 position: relative;
+                                 left: 2px; 
+                                 padding: 3px;                                                            
+                                 max-width: 250px;
+}
+
+.mj-treeview .mj-item .mj-content .mj-text:hover { background: #e8e8e8; border: 1px solid #999; border-radius: 5px; }
+
+.mj-treeview .mj-item .mj-content .mj-checkbox { width: 13px; height: 13px; border: 1px solid #aaa; border-radius: 3px; background: #efefef; }
+.mj-treeview .mj-item .mj-content.selected .mj-checkbox { background: #efefef url('../images/tick-13x13.png') no-repeat center; }
+.mj-treeview .mj-item .mj-content.half-selected .mj-checkbox { background: #efefef url('../images/half-tick-13x13.png') no-repeat center; }
+
+.mj-treeview .mj-item.selected div.mj-radio .mj-dot { background: #666; }
+
+.mj-treeview .mj-open { position: relative; top: 5px;  width: 14px; height: 14px; background: url('../images/arrow-down.png') no-repeat center; }
+.mj-treeview .mj-closed { position: relative; top: 5px; width: 14px; height: 14px; background: url('../images/arrow-right.png') no-repeat center;  }
+.mj-treeview .mj-item .treeview-spacer { width: 18px; height: 2px; float: left; }
+.mj-treeview .mj-treeview { margin-left: 34px; }
+.mj-treeview .mj-item .mj-expander { position: relative; top: 3px; margin-right: 4px; float: left; }
+
+
+.mj-treeview-container .filter-box {
+    position: absolute;
+    left:0px;
+    right:0px;
+    bottom: 0px;
+    border-top: 1px solid #ccc;
+    height: 34px;
+}
+
+.mj-treeview-container .searchbox-container {
+    position: absolute;
+    left: 0px;
+    right: 46px;
+}
+
+.mj-treeview-container .filter-box input.searchbox {
+    padding: 3px;
+    border: 1px solid #b0b0b0;
+    margin: 5px;
+    outline: none;
+    width: 100%;
+}
+
+.mj-treeview-container .filter-box div.search-btn {
+    background: #b0b0b0 url('../images/Search_White.png');
+    background-size: 18px 18px;
+    background-repeat: no-repeat;
+    background-position: 2px 2px;
+    width: 18px;
+    height: 18px;
+    padding: 3px;
+    position: relative;
+    top: 5px;   
+    right: 5px;
+    float: right; 
+}

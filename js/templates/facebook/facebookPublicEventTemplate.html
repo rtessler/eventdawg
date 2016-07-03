@@ -1,0 +1,15 @@
+﻿<a href="#" class="public-event" data-id='<%= model.id %>'>
+   
+    <img src='<%= model.pic_big %>' />
+                       
+    <div class='text truncate170'><%= model.name %></div>    
+                     
+    <img class="marker" src="img/markers/facebook/<%= marker %>" />
+
+    <div class='date'>
+            <%= moment(model.d1).format("D MMM  hh:mm") %> 
+    </div>
+
+    <div class='clear'></div>
+
+</a>

@@ -1,0 +1,91 @@
+.mj-listbox-container {
+    position: relative;
+    width: 100%;
+    height: 100%;           /* height depends on container */
+    min-width: 80px;
+    /*min-height: 36px;*/       /* the height of the filter box */
+    overflow: hidden;
+}
+
+.mj-listbox {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    overflow: auto;
+    margin-left: 5px;
+    margin-right: 5px;
+    max-height: 300px;
+    height: 100%;
+}
+
+.mj-listbox .mj-item { text-decoration: none; display: block; color: #333; cursor: default; white-space: nowrap; outline: none; color: inherit; }
+
+.mj-listbox .mj-item.disabled { cursor: default; color: #000; opacity: .55; filter: Alpha(Opacity=45); }
+
+.mj-listbox .mj-item .mj-image { padding-left: 3px; position: relative; margin-right: 3px; }
+
+.mj-listbox .mj-item .mj-checkbox { border: 1px solid #aaa; 
+                                    width: 13px; 
+                                    height: 13px;  
+                                    background-color: #efefef; 
+                                    margin-right: 3px; 
+}
+
+.mj-listbox .mj-item.selected .mj-checkbox { background-color: #efefef ; background-image: url('../images/tick-13x13.png');  }
+
+.mj-listbox .mj-item.half-selected .mj-checkbox { background-color: #efefef; background-image: url('../images/half-tick-13x13.png'); }
+
+.mj-listbox .mj-item.selected .mj-radio .mj-dot { background-color: #666; }
+
+.mj-listbox .mj-item .mj-text { padding: 2px; }
+
+.mj-listbox .mj-item .mj-text:hover { background: #e8e8e8; border: 1px solid #ccc; border-radius: 5px; }
+
+.mj-listbox .mj-item.mj-active .mj-text { border: 1px solid #ccc; border-radius: 5px; }
+
+.mj-listbox .mj-item .mj-label {
+    width: 80px;
+}
+
+.mj-listbox .mj-item .mj-input {
+    height: 15px;
+    padding: 5px;
+    width: 80px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    margin: 5px;
+}
+
+.mj-listbox-container .filter-box {
+    border-top: 1px solid #ccc;
+    height: 34px;
+}
+
+.mj-listbox-container .filter-box .searchbox-container {
+    position: absolute;
+    left: 0px;
+    right: 46px;
+}
+
+.mj-listbox-container .filter-box input.searchbox {
+    padding: 3px;
+    border: 1px solid #b0b0b0;
+    margin: 5px;
+    outline: none;
+    width: 100%;
+}
+
+.mj-listbox-container .filter-box div.search-btn {
+    background: #b0b0b0 url('../images/Search_White.png');
+    background-size: 18px 18px;
+    background-repeat: no-repeat;
+    background-position: 2px 2px;
+    width: 18px;
+    height: 18px;
+    padding: 3px;
+    position: relative;
+    top: 5px;   
+    right: 5px;
+    float: right; 
+}

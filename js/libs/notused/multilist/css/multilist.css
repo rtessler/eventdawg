@@ -1,0 +1,32 @@
+ul.multilist { list-style:none; padding: 0px; margin: 0px; }
+
+ul.multilist li { /*line-height: 14px;*/ clear:both; }
+
+ul.multilist li a.node { text-decoration: none; display: block; color: #333; cursor: default; }
+
+ul.multilist li a.node.disabled { cursor: default; color: #000; opacity: .55; filter: Alpha(Opacity=45); }
+
+ul.multilist li a.node .image { float:left; padding-left: 5px; padding-right: 5px; padding-top:5px; position: relative; }
+
+ul.multilist li a.node .text {  margin-left: 2px; 
+                                padding: 3px; 
+                                border: 1px solid transparent; 
+                                position: relative;  
+                                max-width: 300px;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                font-family: Verdana,Arial,sans-serif; font-style: normal; font-size: 13px; }
+
+ul.multilist li a.node .text:hover { background: #e8e8e8; border: 1px solid #999; border-radius: 5px; }
+
+/* ul.multilist li a.node .text:hover { text-decoration: underline; color: red; } */
+
+ul.multilist li a.node div.radio { float: left; position: relative; top: 4px; width: 14px; height: 14px; border-radius: 14px; border: 1px solid #999; }
+ul.multilist li a.node div.radio .dot { position: relative; top: 3px; left: 3px; width: 8px; height: 8px; border-radius: 8px;  }
+ul.multilist li a.node.selected div.radio .dot { background: #666; }
+
+ul.multilist li a.node .checkbox { float:left; border: 1px solid #aaa; border-radius: 3px; position: relative; top: 5px; width: 13px; height: 13px;  background: #efefef; }
+
+ul.multilist li a.node.selected .checkbox { position: relative; top: 5px;  width: 13px; height: 13px; background: #efefef url('../images/check_black.png') no-repeat center; }
+ul.multilist li a.node.half-selected .checkbox { position: relative; top: 5px;  width: 13px; height: 13px; background: #efefef url('../images/check_indeterminate_black.png') no-repeat center; }
