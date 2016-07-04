@@ -1,0 +1,1096 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Event Dawg</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <!--  Mobile viewport optimized -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Favicon and Apple short cut icons -->
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="shortcut icon" type="image/png" href="img/paw-print-logo.png" />
+
+<!--    <link rel="stylesheet" href='css/normalize.css' />
+    <link rel="stylesheet" href='css/main.css' />-->
+    <!--<link rel="stylesheet" href='css/style.css'>-->
+
+    <link rel="stylesheet" href="stylesheets/screen.css" media="screen, projection"  type="text/css" />
+
+    <!--<link rel="stylesheet" type="text/css" href="js/libs/jquery-ui/jquery.ui.all.css" />-->
+    <link rel="stylesheet" type="text/css" href="js/libs/jquery-ui-1.10.4.custom/css/smoothness/jquery-ui-1.10.4.custom.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="js/libs/timepicker/jquery.timepicker.css" />
+
+    <link rel="stylesheet" type="text/css" href="js/libs/select2/select2.css" />
+
+</head>
+
+<body>
+    <div id="fb-root"></div>    
+
+    <div id="wrapper">
+
+    	<div id="content"></div>
+            
+    </div>
+
+    <div id="loading"><table><tr><td><img src="img/ajax-loader.gif" /><br />Loading</td></tr></table></div> 
+
+    <script type="text/template" id="header-template">
+
+        <div class="logo">
+            <a href="/">
+                <img src='img/paw-print-md-50x50-white.png' />
+                <span id="appname"><%= name %></span>
+            </a>
+        </div>
+
+        <div class="message"></div>
+
+        <div class="menu">
+
+          <ul>         
+    
+            <!--
+            <li class="not-logged-in"><a href="#" class="add fancybox-login">events</a>
+
+                <ul class="submenu">
+                    <li><a href="#" class="add">add</a></li>
+                    <li><a href="#" class="list">my events</a></li>
+                </ul>
+            </li>
+            <li class="not-logged-in">
+            -->
+
+            <li>
+      
+              <a href="#" class="login">
+          
+                  <!--<img src='img/downarrow.png' style="height:5px; padding-left:10px;" />-->
+                  <img src="" class="image" />
+                  <span class="text">login</span>
+              </a>
+
+              <ul class="submenu">                    	
+                  <!--<li><a href="#" class="details">Account details</a></li>
+                  <li><a href="#" class="change-password">Change Password</a></li>-->
+                  <li><a href="#" class="logout">log out</a></li>
+                    <li><a href="../about/index.html" class="about">about</a></li>
+                    <li><a href="mailto:robert@rtessler.com" class="contact">contact</a></li>
+                  
+              </ul>
+            </li>
+
+          </ul>
+
+        </div>
+
+    </script>
+
+    <script type="text/template" id="footer-template">
+    </script>
+
+    <script type="text/template" id="home-template">
+
+        <div id="header"></div>
+
+        <div id="home-page">
+
+	        <div id="top-panel"></div>
+	        <div id="sidebar">the sidebar</div>
+            <div id="content-control"></div>
+	        <div id="main-content">
+                <div class="map"></div>
+                <div class="right-panel">
+                    <div class="featured-events"></div>
+                    <div class="event-details"></div>
+                </div>
+                <div class="list"></div>
+	        </div>
+
+        </div>
+
+        <div id="footer"></div>
+
+    </script>
+
+    <script type="text/template" id="sidebar-template">
+        <div id="network-info">
+            <div class="facebook-info"></div>
+        </div>
+    </script>
+
+    <script type="text/template" id="slider-template">
+
+        <div class="control-bar">
+    
+            <!--
+            <div class="mode-button-controls" style="border-bottom: 1px solid #999; border-right: 1px solid #999;">
+        
+                <div style="padding:15px; text-align: center;">
+                    <div class="play-animation-btn"></div>
+                    <a href="#" class="btn-mapstyle" title="map style"><img src='img/buttons/map-button.gif' /></a>
+                    <a href="#" class="btn-home" title="home"><img src='img/buttons/home-button.gif' /></a>
+                    <a href="#" class="btn-facebook" title="facebook events"><img src='img/buttons/facebook-button.gif' /></a>
+                    <a href="#" class="btn-list-cat" title="list events"><img src='img/buttons/list-button.gif' /></a>
+                    <a href="#" class="btn-favourites" title="favourites"><img src='img/buttons/favourite-button.gif' /></a>
+                    <a href="#" class="btn-options" title="options"><img src='img/buttons/settings-button.gif' /></a>
+                </div>
+        
+            </div>
+            -->
+
+            <div>
+                <div class="slider-markings"></div>
+                <div id="slider"></div>
+            </div>    
+
+        </div>
+
+    </script>
+
+    <script type="text/template" id="network-template">
+
+        <div class="padder">
+
+            <h5>NETWORKING</h5>
+
+            <ul class="networks">
+
+                <li class="facebook active">
+
+                    <table>
+                        <tr>
+                            <td><img src='img/buttons/facebook-button.png' title="facebook"/></td>
+                            <td><span class="message">0 friends</span></td>
+                            <td><span class='count'>0 events</span></td>
+                        </tr>
+                    </table>
+
+                </li>
+
+            <!--            
+                <li >
+                    <a href="#" class="dawg">
+                        <img style="width:31px;" src='img/paw-print-md-50x50-black.png' title="event dawg"/>
+                        <span>event dawg</span>
+                        <span class='count' style="float: right;">0 events</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="google">
+                        <img style="width:31px;" src='img/buttons/google-plus.png' title="google plus"/>
+                        <span>google plus</span>
+                        <span style="float: right">0 events</span>
+                    </a>
+                </li>            
+                <li>
+                    <a href="#" class="planvine">
+                        <img src='img/buttons/planvine-button.png' title="planvine"/>
+                        <span>planvine</span>
+                        <span style="float: right">0 events</span>
+                    </a>
+                </li>
+          
+                <li>
+                    <a href="#" class="favourites" title="favourites">                
+                        <img src='img/buttons/favourite-button.png' title="favourites"/>
+                        <span>favourites</span>
+                        <span class="count" style="float: right;">0 events</span>
+                    </a>
+                </li>
+                -->
+            </ul>
+
+        </div>
+
+    </script>
+
+    <script type="text/template" id="event-details-dialog-template">
+
+        <div class="contents">
+
+            <div class="heading truncate500"><%= name %></div>
+
+            <br />
+
+            <p class="address">WHERE: <%= address %></p>  
+
+            <p class="date-range">WHEN: &nbsp;<span class="start-date"><%= start_date %></span></p>       
+            
+            <p><%= location %></p>
+            <br />              
+                 
+            <div id="description-wrapper">
+                
+                <div class="nano event-details-nano">
+	                <div class="content">                     
+                        <pre style="overflow:auto"><div class="description "><%= description %></div></pre>
+                    </div>
+                </div>  
+        
+            </div> 
+
+            <br />
+    
+            <div class='table' style="width: 100%;">
+
+                <div class='row'>
+
+                    <div class="cell people" style="width: 25%;"></div>
+
+<!--                    <div class='cell people' style="width:25%; border-right: 1px solid #ccc;">
+
+                        <table>
+                            <tr>
+                                <td class="label">Attending</td>
+                                <td class="value attending"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="label">Maybe</td>
+                                <td class="value maybe"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="label">Invited</td>
+                                <td class="value invited"></td>
+                            </tr>
+
+                            <tr>
+                                <td class="label">Declined</td>
+                                <td class="value declined"></td>
+                            </tr>
+                        </table>
+
+                    </div>-->
+
+                    <div class='cell image' style="width:50%;" >
+                        <a href="https://www.facebook.com/events/<%= id %>" target="_blank">
+                            <% if (!empty(image)) { %>
+                            <img src='<%= image %>' />
+                            <% } %>
+                        </a>
+                    </div>
+
+                    <div class="cell info" style="width:25%; height: 100%; border-left: 1px solid #ccc; padding-left: 5px;">
+
+                        <table>
+
+                            <tr>
+                                <td class="label"><img src="img/public.png" /></td>
+                                <td class="value privacy"><span class="privacy"><%= privacy %></span> </td>
+                                <td><span class="rsvp-status"><%= rsvp_status %></span></td>
+                            </tr>
+
+                        </table>
+
+                        <div class="ticket-uri"><%= ticket_uri %>&nbsp;</div>
+
+<!--                        <div class="table join-maybe-decline">
+                            <div class="row">
+                                <div class="cell"><a class="btn-join _42ft _42fu _42g-" href="#" >Join</a></div>
+                                <div class="cell"><a class="btn-maybe _42ft _42fu _42g-" href="#" >Maybe</a></div>
+                                <div class="cell"><a class="btn-decline _42ft _42fu _42g-" href="#" >Decline</a></div>
+                            </div>
+                        </div>-->
+
+                        <div class="tell-a-friend">
+                            <p>Tell a Friend:</p>
+
+                            <table>
+                                <tr>
+
+                                    <!--<td><a href="#" title="Share on Facebook" class="btn-facebook" data-dimensions="626,436"><img src="img/social_networks2/facebook.png" /></a></td>-->
+
+                                    <!--<td><div class="fb-share-button" data-href="http://developers.facebook.com/docs/plugins/" data-width="50" data-type="button_count"></div></td>-->
+
+                                    <td><a title="Share on Facebook" href="<%= facebook_url %>" class="btn-facebook" target="_blank" data-dimensions="626,436"><img src="img/social_networks2/facebook.png" /></a></td>
+                                    <td><a title="Share on Google" href="<%= google_url %>" class="btn-google" target="_blank" data-dimensions="626,436"><img src="img/social_networks2/google.png" /></a></td>
+                                    <td><a title="Share on Twitter" href="<%= twitter_url %>" class="btn-twitter" target="_blank" data-dimensions="626,436"><img src="img/social_networks2/twitter.png" /></a></td>
+                                    <td><a title="Share on LinkedIn" href="<%= linkedin_url %>" class="btn-linkedin" target="_blank" data-dimensions="626,436"><img src="img/social_networks2/linkedin.png" /></a></td>
+                                    <!--<td><a href="<%= stumbleupon_url %>" class="btn-stumbleupon" target="_blank"><img src="img/social_networks2/stumbleupon.png" /></a></td>-->
+
+                                    <td><a href="mailto:someone@somewhere.com&subject=<%= name %>&body=<%= dawgurl %>"><img src="img/social_networks2/email.png" /></a></td>
+
+                                </tr> 
+                            </table>
+                        </div>
+
+                        <div class="more" >
+                            <a class="link" href="https://www.facebook.com/events/<%= id %>" target="_blank" >more...</a>
+                        </div>
+                    </div>   
+            </div>
+        </div>
+
+    </script>
+
+    <script type="text/template" id="event-details-template">
+
+        <div class="name truncate200"><%= name %></div>
+
+        <br />
+
+        <table class="info">
+
+            <tr class="where">
+                <td>WHERE:</td>
+                <td> <%= address %> <%= location %></td>  
+            </tr>
+
+            <tr class="when">
+                <td>WHEN:</td>
+                <td class="start-date"><%= start_date %></td>       
+            </tr>
+
+            <tr>
+                <td>STATUS:</td>
+                <td>
+                    <span class="privacy"><img src="img/public.png" class="left"/> <%= privacy %></span> 
+                    ,
+                    <span class="rsvp-status"><%= rsvp_status %></span>
+                </td>
+            </tr>
+
+        </table>
+
+        <br />
+
+        <table class="promote-image-network">
+            <tr>
+
+                <td>
+                    <div class='image'>
+                        <a href="https://www.facebook.com/events/<%= id %>" target="_blank">
+                            <% if (!empty(pic_big)) { %>
+                                <img src='<%= pic_big %>' />
+                            <% } %>
+                        </a>
+                    </div>
+                </td>
+
+                <td style="text-align:right;">
+
+                    <table class="network tell-a-friend">
+                        <tr>
+                            <td><a title="Share on Facebook" href="<%= facebook_url %>" class="btn-facebook" target="_blank" data-dimensions="626,436"><img src="img/social_networks2/facebook.png" /></a></td>
+                        </tr>
+
+                        <tr>
+                            <td><a title="Share on Google" href="<%= google_url %>" class="btn-google" target="_blank" data-dimensions="626,436"><img src="img/social_networks2/google.png" /></a></td>
+                        </tr>
+
+                        <tr>
+                            <td><a title="Share on Twitter" href="<%= twitter_url %>" class="btn-twitter" target="_blank" data-dimensions="626,436"><img src="img/social_networks2/twitter.png" /></a></td>
+                        </tr>
+
+                        <tr>
+                            <td><a title="Share on LinkedIn" href="<%= linkedin_url %>" class="btn-linkedin" target="_blank" data-dimensions="626,436"><img src="img/social_networks2/linkedin.png" /></a></td>
+                        </tr>
+
+                            <!--<td><a href="<%= stumbleupon_url %>" class="btn-stumbleupon" target="_blank"><img src="img/social_networks2/stumbleupon.png" /></a></td>-->
+                        <tr>
+                            <td><a href="mailto:someone@somewhere.com&subject=<%= name %>&body=<%= dawgurl %>"><img src="img/social_networks2/email.png" /></a></td>
+                        </tr>
+
+                    </table>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+        <table class="info" >
+
+            <tr>
+
+                <td>
+                
+                    <div class="cell people" style="width: 50%;"></div>
+
+                </td>
+
+                <td style="text-align: right;">
+
+                    <div>
+                    <a href="#" class="btn promote">promote</a>
+
+                    <% if (!empty(ticket_uri)) { %>
+                        <a href="<%= ticket_uri %>" target="_blank" class="btn ticket-uri">get tickets</a>
+                    <% } %>
+                    </div>
+                </td>
+
+            </tr>
+
+        </table>
+
+        <br />
+
+        <div class="description-wrapper">
+                
+            <div class="nano event-details-nano">
+	            <div class="content">                     
+                    <pre style="overflow:auto"><div class="description"><%= description %></div></pre>
+                </div>
+            </div>  
+        
+        </div> 
+
+    </script>
+
+    <script type="text/template" id="featured-events-template">
+
+        <h3 class="title">Featured Events</h3>
+
+        <ul class='events'></ul>
+
+    </script>
+
+    <script type="text/template" id="attending-template">
+
+        <div class="going">
+
+            <p class="title">Going (<%= going.length %>)</p>
+
+            <div class="list">
+
+                <% _.each(going, function(o) { %>
+                    <a href="https://www.facebook.com/<%= o.uid %>" class="user" data-uid="<%= o.uid %>" title="<%= o.name %>" target="_blank"><img src="<%= o.pic_square %>" /></a>
+                <% }); %>
+
+            </div>
+
+        </div>
+
+        <div class="maybe">
+
+            <p class="title">Maybe (<%= maybe.length %>)</p>
+
+            <div class="list">
+
+                <% _.each(maybe, function(o) { %>
+                    <a href="https://www.facebook.com/<%= o.uid %>" class="user" data-uid="<%= o.uid %>" title="<%= o.name %>" target="_blank"><img src="<%= o.pic_square %>" /></a>
+                <% }); %>
+
+            </div>
+
+        </div>
+
+        <div class="invited">
+
+            <p class="title">Invited (<%= invited.length %>)</p>
+
+            <div class="list">
+
+                <% _.each(invited, function(o) { %>
+                    <a href="https://www.facebook.com/<%= o.uid %>" class="user" data-uid="<%= o.uid %>" title="<%= o.name %>" target="_blank"><img src="<%= o.pic_square %>" /></a>
+                <% }); %>
+
+            </div>
+
+        </div>
+
+    </script>
+
+    <script type="text/template" id="top-panel-template">
+
+        <table style="width: 100%;">
+            <tr >
+                <td style="width:265px;"><div id="networks"></div></td>
+                <!--<td style="vertical-align: top; width:265px;"><div class="what-controls"></div>            </td>-->
+                <td style="vertical-align: top; width:250px;"><div class="where-controls"></div></td>
+                <td style="vertical-align: top;"><div class="when-controls" ></div></td>
+            </tr>
+        </table>
+
+    </script>
+
+    <script type="text/template" id="when-template">
+
+        <div class="padder">
+
+            <div style="margin-bottom: 8px;"><h5>WHEN</h5></div>
+
+                <!--
+            <ul>
+
+                <li><a class="day active" href="#"><span>Today </span><div class="radio"><div class="dot"></div></div></a></li>
+                <li><a class="week " href="#"><span>This Week </span><div class="radio"><div class="dot"></div></div></a></li>
+                <li><a class="month" href="#"><span>This Month </span><div class="radio"><div class="dot"></div></div></a></li>
+                <li><a class="year" href="#"><span>This Year </span><div class="radio"><div class="dot"></div></div></a></li>
+        
+
+                <li><a class="btn day active" href="#">Today</a></li>
+                <li><a class="btn week " href="#">This Week</a></li>
+                <li><a class="btn month" href="#">This Month</a></li>
+                <li><a class="btn year" href="#">This Year</a></li>
+                <li><a class="btn range" href="#">Range</a></li>
+            </ul>
+            -->
+
+            <div class="table">
+                <div class="row">
+                    <div class="cell"><a class="btn day active" href="#">Today</a></div>
+                    <div class="cell"><a class="btn week" href="#">This Week</a></div>
+                    <div class="cell"><a class="btn month" href="#">This Month</a></div>
+                    <div class="cell"><a class="btn year" href="#">This Year</a></div>
+                    <div class="cell"><a class="btn range" href="#">Range</a></div>
+                    <div class="cell"><input id="start_date" readonly="readonly" /></div>
+                    <div class="cell"><input id="end_date" readonly="readonly" /></div>
+                </div>
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="time-slider-bar"></div>
+        </div>
+
+    </script>
+
+    <script type="text/template" id="where-template">
+
+        <div class="padder">
+
+            <h5>WHERE</h5>
+
+            <table>
+                <tr>
+                    <td><input id="where" class="autocomplete" type="text" placeholder="Place or Keyword..." name="search" style="float: left;" /></td>
+
+                    <td> <img id="wait-icon" src='img/wait icons/23.gif' /> </td>
+                    <td nowrap> <label id="status" ></label> </td>
+
+                   </tr>
+            </table>
+    
+        </div>
+
+    </script>
+
+    <script type="text/template" id="event-list-template">
+
+        <ul class="tiles">
+            
+            <% _.each(events, function(e) { %>                       
+
+                    <li data-eid="<%= e.id %>">
+
+                        <a class="link" href="https://www.facebook.com/events/<%= e.id %>" target="_blank" >
+                                <img src="<%= e.pic_big %>" />
+                        </a>
+
+                        <p>
+                            <%= ellipse(e.name, 500) %>
+                        
+
+                            <div class="dates">
+
+                                <% if (e.dm1.day() == e.dm2.day()) { 
+
+                                    if (e.dm1.hour() != e.dm2.hour()) { %>
+                                        <%= e.dm1.format("D MMM YYYY hh:mm") %> - <%= e.dm2.format("hh:mm") %> 
+                                    <% } else { %>
+                                        <%= e.dm1.format("D MMM YYYY hh:mm") %> 
+                                    <% } %>
+
+                                <% } else { %>
+                                    <%= e.dm1.format("D MMM hh:mm") %> - <%= e.dm2.format("D MMM YYYY hh:mm") %> 
+                                <% } %>
+
+                            </div>
+
+                        </p>
+
+                    </li>
+
+            <% }); %>
+            
+        </ul>
+
+    </script>
+
+    <script type="crap">
+
+                            <p class="description truncate110"> <%= e.description %> </p>
+
+                            <p class="attending">
+
+                                attending:
+
+                                <% if (!empty(e.attending)) { 
+                                    _.each(e.attending, function(a) { %>
+                                        <span><%= a.name %>: <%= a.rsvp_status %></span>
+                                    <% });  } %>
+
+
+    </script>
+
+    <script type="text/template" id="map-template">
+        <div id="map_canvas"></div>
+    </script>
+
+    <script type="text/template" id="promote-template">
+
+        <div class="dialog">
+
+            <div class="header">
+                Promote Event
+            </div>
+
+            <div class="body form">
+
+                <table style="width:100%;">
+                    <tr>
+                        <th><label for='name'>Name</label></th>
+                        <td><input type='text' class='name large readonly' readonly="readonly" value='<%= model.name %>' />
+                        </td>                            
+                    </tr>
+
+                    <tr>
+                        <th><label for='name'>Details</label></th>
+                        <td>
+                            <textarea class='description large readonly' readonly="readonly"><%= model.description %></textarea>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th><label for='name'>Where</label></th>
+                        <td>
+                            <input class='where large readonly' readonly="readonly" value='<%= address %>' />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th><label for='start-date'>When</label></th>
+                        <td>
+                            <input type='text' class='start-date date' required="required" readonly="readonly" value="<% model.start_date %>" />
+                            <input type='text' class='start-time time'  placeholder="Add a time?" value="<%= model.start_time %>" />
+                            <div class='error-msg start'></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th><label for='end-date'>To</label></th>
+                        <td>
+                            <input type='text' class='end-date date' required="required" readonly="readonly" value="<%= model.end_date %>"/>
+                            <input type='text' class='end-time time' placeholder="Add a time?" value="<%= model.end_time %>" />
+                            <div class='error-msg end'></div>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+            <div class="footer">
+
+                <button class="right ok _42ft _42fu  _42g- _42gy">Promote</button>
+                <button class="right cancel _42ft _42fu">Cancel</button>
+
+            </div>
+        </div>
+
+    </script>
+
+
+    <script type="text/template" id="edit-event-template">
+
+        <div class="dialog">
+
+            <div class="header">
+                Create/Edit Event
+            </div>
+    
+            <div class="body form">
+    
+                <table style="width:100%;">
+                    <tr>
+                        <th><label for='name'>Name</label></th>
+                        <td><input type='text' class='name large' required placeholder="ex: concert" value='<%= name %>' />
+                            <div class='error-msg name-error-msg'></div>
+                        </td>                            
+                    </tr>
+
+                    <tr>
+                        <th><label for='name'>Details</label></th>
+                        <td>
+                            <textarea class='description large' required placeholder="Add more info"><%= description %></textarea>
+                            <div class='error-msg description-error-msg'></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th><label for='name'>Where</label></th>
+                        <td>
+                            <!--<input class='where large' required placeholder="Add a place?" value='<%= where %>' />-->
+                            <!--<input type="hidden" class='where' style="width:300px;" />-->
+                            <input class='where' />
+                            <div class='error-msg where-error-msg'></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th><label for='start-date'>When</label></th>
+                        <td>
+                            <input type='text' class='start-date date' required readonly="readonly" value="<% start_date %>" />
+                            <input type='text' class='start-time time'  placeholder="Add a time?" value="<%= start_time %>" />
+                            <div class='error-msg start-time-error-msg'></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th><label for='end-date'>To</label></th>
+                        <td>
+                            <input type='text' class='end-date date' required readonly="readonly" value="<%= end_date %>"/>
+                            <input type='text' class='end-time time' placeholder="Add a time?" value="<%= end_time %>" />
+                            <div class='error-msg end-time-error-msg'></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th><label for='privacy-type'>Privacy</label></th>
+                        <td>
+
+                            <input type="hidden" class='privacy-type' style="width:150px;" required />
+                
+                            <div class='error-msg privacy-error-msg'></div>
+                        </td>
+                    </tr>
+
+<!--                    <tr>
+                        <th></th>
+                        <td>
+                            <input type='checkbox' class='friends-can-invite-guests' value="1"/>
+                            <span>Guests can invite friends</span>
+                            <div class='error-msg'></div>
+                        </td>
+                    </tr>-->
+
+                </table>
+
+                <div class="friends"></div>
+
+            </div>
+
+            <div class="footer">
+
+                <button class="right create _42ft _42fu  _42g- _42gy">Create</button>
+                <button class="right cancel _42ft _42fu">Cancel</button>
+
+            </div>
+
+        </div>
+
+    </script>
+
+    <script type="text/template" id="facebook-events-template">
+
+        <div class="title"><%= title %></div>
+        <ul class='events'></ul>
+    </script>
+
+    <script type="text/template" id="facebook-event-template">
+
+        <a href="#" class="event" data-id='<%= model.eid %>'>
+
+            <img src='<%= model.pic_small %>' />
+                     
+            <div class='text truncate170' title="<%= model.name %>"><%= model.name %></div>    
+                     
+            <img class="marker" src="img/markers/facebook/<%= marker %>" />
+
+            <div class='date'> <%= model.dm1.format("D MMM hh:mm") %> </div>
+
+            <div class='clear'></div>
+
+        </a>
+
+        <div class="people">
+
+            <% _.each(people, function(o) { %>
+                <div class="person"><%= o %></div>
+            <% }); %>
+
+        </div>
+
+    </script>
+
+    <script type="text/template" id="facebook-public-events-template">
+
+        <input class="search-string autocomplete" type="text" placeholder="Place or Keyword..." name="search" value="<%= search_string %>" />
+
+        <a class="search _42ft _42fu" href="#" >Search</a>
+
+        <div class="clear"></div>
+
+        <div class="error-text"></div>
+
+        <ul class="public-events"></ul>
+
+    </script>
+
+    <script type="text/template" id="facebook-public-event-template">
+
+        <a href="#" class="public-event" data-id='<%= model.id %>'>
+   
+            <img src='<%= model.pic_big %>' />
+                       
+            <div class='text truncate170'><%= model.name %></div>    
+                     
+            <img class="marker" src="img/markers/facebook/<%= marker %>" />
+
+            <div class='date'>
+                    <%= moment(model.dm1).format("D MMM hh:mm") %> 
+            </div>            
+
+        </a>
+
+        <div class='clear'></div>
+
+    </script>
+
+    <script type="text/template" id="facebook-filter-template">
+
+        <div class="table">
+
+            <div class="row">
+
+                <div class="cell"><a class="friends-btn _42ft _42fu" href="#" >Friends</a></div>
+                <div class="cell"><a class="events-btn _42ft _42fu" href="#" >Events</a></div>
+                <div class="cell"><a class="public-btn _42ft _42fu" href="#" >Public</a></div>
+                <div class="cell"><a class="add-btn _42ft _42fu" href="#" >Add</a></div>
+                <div class="cell"><a class="expand-btn _42ft _42fu"> &#x25BC;</a></div>
+                <div class="cell">
+                    <a class="list-btn _42ft _42fu"> 
+<!--                        <div style="margin-top: 3px; margin-bottom: 3px;">
+					        <div class='rounded-rectangle'></div>
+					        <div class='rounded-rectangle'></div>
+					        <div class='rounded-rectangle'></div>
+                        </div>-->
+                        <img src="img/list3.png" />
+
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="list"></div>
+
+    </script>
+
+    <script type="text/template" id="facebook-friends-template">
+        <ul class='friends'></ul>
+    </script>
+
+    <script type="text/template" id="facebook-friend-template">
+
+        <div>
+
+            <a href='#' class='item friend' id='<%= id %>'>
+                <img src='<%= image %>' />
+
+                <div class="text truncate110" title="<%= name %>"><%= name %></div>
+
+                <div class="count"><%= count %></div>
+
+                <div class='clear'></div>
+            </a>
+
+        </div>
+
+        <% if (events) { %>
+            <div class="friend-events clearfix">
+                <ul>
+            
+                    <% _.each(events, function(e, index) { %>
+
+                        <div class='event' data-id="<%= e.id %>">
+
+                            <div class='name truncate200' title='<%= e.get("name") %>'><%= e.get("name") %></div>
+                            <div class="line2">
+                                <div class='rsvp_status'><%= rsvp_status[index] %></div>
+                                <div class="date"><%= e.get("dm1").format("D MMM YY hh:mm") %> </div>
+                            </div>
+
+                        </div>
+
+                    <% }); %>
+            
+                </ul>
+            </div>
+
+        <% } %>
+
+    </script>
+
+    <script type="text/template" id="facebook-test-template">
+
+        <h3>facebook javascript tests</h3>
+
+        <div class="fb-like" data-send="true" data-width="450" data-show-faces="true"></div>
+
+        <div class="fb-share-button" data-href="http://developers.facebook.com/docs/plugins/" data-type="button"></div>
+
+        <div class="ui-widget">
+          <label for="birds">Birds: </label>
+          <input id="birds" />
+        </div>
+
+        <form id="upload">
+             <input type="file" id="file" name="file"/>
+             <a href="#" class="upload">Submit</button>
+        </form>
+
+        <div class="status">not logged in</div>
+
+        <ul class="controls">
+	        <li><a href="#" class="login disabled" data-id="login">login</a></li>	
+	        <li><a href="#" class="get-my-details disabled" data-id="get-my-details">Get my details</a></li>	
+	        <li><a href="#" class="get-friend-events disabled" data-id="get-friend-events">Get friend events</a></li>
+	        <li><a href="#" class="compare disabled" data-id="get-my-details">Compare Friend and public events 2</a></li>
+	        <li><a href="#" class="search disabled" data-id="post-feed">Search</a></li>
+	        <li><a href="#" class="post-feed disabled" data-id="post-feed">Post message to someones wall</a></li>
+	        <li><a href="#" class="send-mail disabled" data-id="send-mail">Send a message a user</a></li>
+	        <li><a href="#" class="get-permissions disabled" data-id="get-permissions">get permissions</a></li>
+	        <li><a href="#" class="post-event disabled" data-id="post-event">post event</a></li>
+        </ul>
+
+        <p>FQL</p>
+
+        <ul class="controls">
+	        <li><a href="#" class="get-my-friends disabled" data-id="get-my-friends">Get my friends</a></li>
+	        <li><a href="#" class="get-my-events disabled" data-id="get-my-events">Get my events</a></li>
+	        <li><a href="#" class="get-public-events disabled" data-id="get-public-events">Get public events</a></li>
+	        <li><a href="#" class="get-friend-events1 disabled" data-id="get-friend-events">Get friend events 1</a></li>
+	        <li><a href="#" class="get-friend-events2 disabled" data-id="get-friend-events2">Get friend events 2</a></li>
+	        <li><a href="#" class="get-friends-event-members-and-events disabled" data-id="get-friends-event-members-and-events">Get friends, event members and events</a></li>	
+	        <li><a href="#" class="get-event-members disabled" data-id="get-event-members">Get event members</a></li>
+        </ul>
+
+        <pre id='output'></pre>
+
+    </script>
+
+<!--    
+    <script type="text/template" id="loading-template">
+        <div class=="loading"><table><tr><td><img src="img/ajax-loader.gif" /><br />Loading</td></tr></table></div> 
+    </script>
+
+    <script type="text/template" id="content-control-template">
+
+        <ul>
+
+            <li class="map active">map</li>
+            <li class="list active">list</li>
+            <li class="sort active">
+                sort by: 
+                <a href="#" class="sort-by-name">name</a> 
+                <a href="#" class="sort-by-date">date</a>
+            </li>
+
+        </ul>
+
+    </script>
+-->
+    <!-- libraries -->
+
+    <script src="//connect.facebook.net/en_US/all.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDhB8_l70DQftAPS6_6Yshv_jAz6Mkg6gQ&libraries=places&sensor=false"></script>
+    <!--<script src="http://j.maxmind.com/app/geoip.js"></script>-->
+    
+<!--    
+    <script src="js/stdlib.js"></script>
+
+    <script src="js/libs/jquery-1.11.1.min.js"></script>    
+    <script src="js/libs/underscore-min.js"></script>    
+    <script src="js/libs/backbone.1.1.2/backbone-min.js"></script>
+    <script src="js/libs/json3.js"></script>
+
+    <script src="js/libs/moment.min.js"></script>
+    <script src="js/libs/moment-range.js"></script>
+    <script src="js/libs/datetools.js"></script>
+
+    <script src="js/libs/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="js/libs/timepicker/jquery.timepicker.js"></script>
+    <script src="js/libs/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/libs/dragslider.js"></script>
+    <script src="js/libs/jquery.validate.min.js"></script>
+        
+    <script src="js/libs/modernizr-2.6.2.js"></script>
+
+    <script src="js/libs/markerclusterer_compiled.js"></script>
+
+    <link rel="stylesheet" href="js/libs/nanoscroller/nanoscroller.css" />
+    <script src="js/libs/nanoscroller/jquery.nanoscroller.js"></script>    
+    
+    <script src="js/libs/backbone-validation-min.js"></script>
+    <script src="js/libs/Backbone.ModalDialog.js"></script>
+    <script src="js/libs/select2/select2.js"></script>
+
+    <script src="js/libs/wookmark/jquery.wookmark.min.js"></script>
+    <script src="js/libs/wookmark/jquery.imagesloaded.js"></script>
+        
+    <script src="js/app.js"></script>
+
+    <script src="js/collections/dawgEventCollection.js"></script>
+
+    <script src="js/models/dawgEventModel.js"></script>
+    <script src="js/models/dawgModel.js"></script>
+    <script src="js/models/eventMemberModel.js"></script>
+    <script src="js/models/eventModel.js"></script>
+    <script src="js/models/friendModel.js"></script>
+    
+    <script src="js/collections/eventCollection.js"></script>
+    <script src="js/collections/eventMemberCollection.js"></script>
+    <script src="js/collections/friendCollection.js"></script>
+
+    <script src="js/models/facebookModel.js"></script>
+    <script src="js/models/searchModel.js"></script>
+
+    <script src="js/views/baseView.js"></script>
+    <script src="js/views/eventDetailsDialogView.js"></script>
+    <script src="js/views/eventDetailsView.js"></script>
+    <script src="js/views/featuredEventsView.js"></script>
+    <script src="js/views/eventListView.js"></script>
+    <script src="js/views/footerView.js"></script>
+    <script src="js/views/headerView.js"></script>
+    <script src="js/views/homeView.js"></script>
+    <script src="js/views/mapView.js"></script>
+    <script src="js/views/networkView.js"></script>
+    <script src="js/views/sidebarView.js"></script>
+    <script src="js/views/sliderView.js"></script>
+    <script src="js/views/topPanelView.js"></script>
+    <script src="js/views/whenView.js"></script>
+    <script src="js/views/whereView.js"></script>
+    <script src="js/views/attendingView.js"></script>
+
+    <script src="js/views/editEventView.js"></script>
+    <script src="js/views/eventsView.js"></script>
+    <script src="js/views/eventView.js"></script>
+    <script src="js/views/filterView.js"></script>
+    <script src="js/views/friendsView.js"></script>
+    <script src="js/views/friendView.js"></script>
+    <script src="js/views/publicEventsView.js"></script>
+    <script src="js/views/publicEventView.js"></script>
+
+    <script src="js/views/promoteView.js"></script>
+    <script src="js/views/facebookTestView.js"></script>
+
+    <script src="js/router.js"></script>
+    <script src="js/main.js"></script>
+-->   
+    <script src="dawg_compiled.js"></script>
+
+</body>
+</html>
